@@ -372,6 +372,7 @@
 
 .modal-content{
     width: 324px !important;
+    padding: 0 20px 0 36px;
 }
 
 .expoModalCont{
@@ -387,6 +388,7 @@
     font-size: 22px;
     font-weight: 600;
     line-height: 22px;
+    margin-top: 6px;
     color: #2D3779;
 }
 .expoBtn{
@@ -394,10 +396,13 @@
     width: 100%;
     font-size: 16px;
     font-weight: 500;
+    margin-right: 16px;
+    margin-bottom: 36px;
 }
 .closeImage{
     width: 100%;
     display: flex;
+    margin-top: 20px;
     align-items: center;
     justify-content: flex-end;
 }
