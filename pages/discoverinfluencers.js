@@ -86,9 +86,13 @@ export default function DiscoverInfluencers(props) {
                       <img src="/Images/accountIcon.png" alt="account" />
                       <span className="dataText">{data.data}</span>
                     </div>
-                    <div className="socialData">
-                      <Image src={data.rateInc ? GraphGreen : GraphRed} />
-                    </div>
+                    {/* <div className="socialData"> */}
+                    <Image
+                      src={data.rateInc ? GraphGreen : GraphRed}
+                      // width="100%"
+                      layout="responsive"
+                    />
+                    {/* </div> */}
                   </div>
                 </Col>
               );

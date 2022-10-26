@@ -286,9 +286,12 @@ export default function DashboardContent() {
           return (
             <div className="columContainer" key={index}>
               <div className="dataCard">
-                <span className="s1">
-                  {d.headingInner}: <span className="s2">{d.num}</span>
-                </span>
+                <div className="spanWrapper">
+                  <span className="s1">
+                    {d.headingInner}: <span className="s2">{d.num}</span>
+                  </span>
+                </div>
+
                 {[1, 2, 3, 4, 5, 6].map((a, index) => {
                   return (
                     <div
@@ -310,10 +313,7 @@ export default function DashboardContent() {
                             </span>
                           </div>
                           <div className="userContainer">
-                            <span>
-                              <FaMapMarkerAlt color="#2D3779" size={14} />{" "}
-                              Switzerland
-                            </span>
+                            <span>Switzerland</span>
                             <span
                               style={{
                                 color: "#B5B5C3",
@@ -358,16 +358,16 @@ export default function DashboardContent() {
                     </div>
                   );
                 })}
+                <Pagination>
+                  <Pagination.First />
+                  <Pagination.Item>{1}</Pagination.Item>
+                  <Pagination.Item>{2}</Pagination.Item>
+                  <Pagination.Item active>{3}</Pagination.Item>
+                  <Pagination.Ellipsis />
+                  <Pagination.Item>{32}</Pagination.Item>
+                  <Pagination.Last />
+                </Pagination>
               </div>
-              <Pagination>
-                <Pagination.First />
-                <Pagination.Item>{1}</Pagination.Item>
-                <Pagination.Item>{2}</Pagination.Item>
-                <Pagination.Item active>{3}</Pagination.Item>
-                <Pagination.Ellipsis />
-                <Pagination.Item>{32}</Pagination.Item>
-                <Pagination.Last />
-              </Pagination>
             </div>
           );
         })}
@@ -676,22 +676,34 @@ export default function DashboardContent() {
       <Modal show={actionShow} onHide={handleActionClose}>
         {action === "Contact" && (
           <Modal.Body className="actdionModal">
-            <h2>Contact</h2>
+            <div className="actionCloseImage" onClick={handleExportClose}>
+              <Image
+                src="/Images/close.png"
+                alt="close"
+                width="10px"
+                height="10px"
+                objectFit="contain"
+              />
+            </div>
+            <div className="actionModalHeading">Contact @username</div>
             <Form.Select
               onChange={(e) => setActionContChoose(e.target.value)}
               defaultValue="Choose..."
+              className="messageSelection"
             >
-              <option>--- Please Select ---</option>
-              <option>DM</option>
+              <option>Please Select</option>
+              <option>Direct Message</option>
               <option>Email</option>
             </Form.Select>
-            {actionContChoose === "DM" && (
+            {actionContChoose === "Direct Message" && (
               <div className="actionDm">
                 <Form.Group className="mb-3" controlId="formGroupEmail">
-                  <Form.Label>Message</Form.Label>
+                  <Form.Label className="messageHeading">Message</Form.Label>
                   <Form.Control
+                    as="textarea"
+                    rows="3"
                     type="text"
-                    placeholder="Enter message"
+                    placeholder="Text"
                     style={{ backgroundColor: "#fff" }}
                   />
                 </Form.Group>
@@ -847,7 +859,7 @@ export default function DashboardContent() {
 
       <div className="exportModal">
         <Modal show={exportShow} onHide={handleExportClose}>
-          <Modal.Body>
+          <Modal.Body className="modalBody">
             <div className="closeImage" onClick={handleExportClose}>
               <Image
                 src="/Images/close.png"
@@ -857,13 +869,14 @@ export default function DashboardContent() {
                 objectFit="contain"
               />
             </div>
-            <span className="exportModalHeading">Do you want to export:</span>
+            <div className="exportModalHeading">Do you want to export:</div>
             <br />
             <div className="expoModalCont">
               <Form.Check type="checkbox" label="All" />
               <Form.Check type="checkbox" label="Identified" />
               <Form.Check type="checkbox" label="Contacted" />
               <Form.Check type="checkbox" label="Registered" />
+              <Form.Check type="checkbox" label="To be Approved" />
             </div>
             <div className="btnCenCont">
               <Button className="primBtn cmmBtn expoBtn">Export</Button>
