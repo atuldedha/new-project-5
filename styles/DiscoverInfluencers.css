@@ -16,13 +16,13 @@
 
 .contentNav .heading h2{
     font-weight: 600;
-    font-size: 20px;
+    font-size: 16px;
     color: #2D3779;
 }
 
 .contentNav .heading span{
     font-weight: 500;
-    font-size: 16px;
+    font-size: 13px;
     color: #B5B5C3;
 }
 
@@ -31,6 +31,14 @@
     border-radius: 6px;
     font-weight: 600;
     padding: 8px 20px;
+    font-size: 12px;
+}
+.filterContent {
+    display: flex;
+    align-items: center;
+}
+.filterText {
+    margin-left: 6px;
 }
 .outlinedBtn{
     border: 1px solid #E9F0FC;
@@ -40,7 +48,7 @@
 
 
 .outlinedBtn img{
-    margin-right: 5px;
+    margin-right: 10px;
 }
 
 .outlinedBtn:hover{
@@ -63,11 +71,13 @@
     border: 1px solid #E9F0FC;
     border-radius: 6px;
     padding: 20px;
+    min-width: 400px;
 }
 
 .dataCard .s1{
     color: #2D3779;
     font-weight: 500;
+    font-size: 14px;
 }
 
 .dataCard .s2{
@@ -88,11 +98,12 @@
     width: 100%;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
 }
 .innerDataCard .user{
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
     margin: 0px 8px;
     float: left;
 }
@@ -100,9 +111,13 @@
 .innerDataCard .user span{
     color: #2D3779;
     font-weight: 500;
-    font-size: 15px;
+    font-size: 12px;
+    white-space: nowrap;
  }
-
+.userContainer {
+    display: flex;
+    flex-direction: row;
+}
 .innerDataCard .user a{
    text-decoration: none;
    display: flex;
@@ -125,7 +140,34 @@
     font-size: 15px;
 
  }
+.container {
+    display: flex;
+    align-items: center;
+}
 
+.dash {
+    margin: 0 9px;
+}
+.form-check-label {
+    font-size: 12px;
+    font-weight: 600;
+}
+ .rowContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    overflow-x: scroll;
+ }
+ .clearFilterText {
+    font-size: 12px;
+    font-weight: 600;
+    color: #7E839F;
+ }
+.col-lg-6 {
+    width: none;
+    margin-right: 20px;
+}
  .innerDataCard .info a{
     text-decoration: none;
     display: flex;
@@ -182,8 +224,65 @@
     flex-direction: row;
   
     align-items: center;
+    justify-content: space-between;
+    margin-bottom: 19px;
   }
-  
+  .imageContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .followingContainer {
+    padding: 2px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+  .rateContainer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: max-content;
+    padding: 2px;
+    border-radius: 4px;
+  }
+  .bgGreen {
+    background: rgba(47, 209, 198, 0.25);
+  }
+  .bgRed {
+    background: rgba(255, 58, 58, 0.25);
+  }
+  .rate {
+    font-size: 10px;
+    font-weight: 600;
+    line-height: 12px;
+  }
+  .textGreen {
+    color: #2FD1C6;
+  }
+  .textRed {
+    color: #E53B3B;
+  }
+  .time{
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 12px;
+    color: #A9AECD;
+    text-align: end;
+  }
+  .dataContainer {
+    display: flex;
+    align-items: center;
+    margin: 0 0 16px 16px;
+  }
+  .dataText {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 24px;
+    margin-left: 6px;
+    color: #2D3779;
+  }
   .instaBg{
     border-radius: 50%;
     padding: 10px 10px;
@@ -251,7 +350,7 @@
 .actionDm .btnRightCont, .actionLabel .btnRightCont, .btnRightCont{
     display: flex;
     flex-direction: row;
-    justify-content: end;
+    justify-content: flex-end;
 }
 
 .actionLabel{
@@ -265,17 +364,29 @@
     padding: 0.375rem 0.75rem;
 }
 
-.expoModalCOnt{
+.modal-dialog {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.expoModalCont{
     padding: 20px 0px;
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
 .expoBtn{
     padding: 0.375rem 0.75rem;
+    width: 100%;
 }
-
+.closeImage{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
 .btnCenCont{
     display: flex;
     flex-direction: row;
