@@ -263,12 +263,6 @@ export default function DashboardContent() {
                 className="filterImage"
               />
               <span className="filterText">Filter</span>
-              {!showFilter && (
-                <IoIosArrowDown style={{ marginLeft: "6px" }} size={16} />
-              )}
-              {showFilter && (
-                <IoIosArrowUp style={{ marginLeft: "6px" }} size={16} />
-              )}
             </div>
           </Button>
           <Button className="ligBtn cmmBtn" onClick={handleExportShow}>
@@ -345,6 +339,11 @@ export default function DashboardContent() {
                               onClick={() => handleAction("Schedule")}
                             >
                               Schedule
+                            </Dropdown.Item>
+                            <Dropdown.Item
+                              onClick={() => handleAction("Remove")}
+                            >
+                              Remove
                             </Dropdown.Item>
                           </DropdownButton>
                         </div>

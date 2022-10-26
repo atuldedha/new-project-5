@@ -38,7 +38,7 @@
     align-items: center;
 }
 .filterText {
-    margin-left: 6px;
+    margin-left: 4px;
 }
 .outlinedBtn{
     border: 1px solid #E9F0FC;
@@ -46,14 +46,9 @@
     color: #313C5E;
 }
 
-
-.outlinedBtn img{
-    margin-right: 10px;
-}
-
 .outlinedBtn:hover{
     background-color: #448DC9;
-    border: 0px;
+    border: 1px solid #448DC9;
     color: #fff;
 }
 
@@ -135,7 +130,6 @@
     margin-left: 2px;
     float: right;
 }
-
 .innerDataCard .info span{
     color: #2D3779;
     font-weight: 500;
