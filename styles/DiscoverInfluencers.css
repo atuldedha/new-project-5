@@ -410,6 +410,9 @@
     align-items: center;
     justify-content: flex-end;
 }
+.closeImage:hover{
+  cursor: pointer;
+}
 .btnCenCont{
     display: flex;
     flex-direction: row;
