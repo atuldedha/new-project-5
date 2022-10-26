@@ -283,7 +283,7 @@ export default function DashboardContent() {
       <div className="rowContainer">
         {data.map((d, index) => {
           return (
-            <Col lg={6} key={index}>
+            <div className="columContainer" key={index}>
               <div className="dataCard">
                 <span className="s1">
                   {d.headingInner}: <span className="s2">{d.num}</span>
@@ -362,7 +362,7 @@ export default function DashboardContent() {
                 <Pagination.Item>{32}</Pagination.Item>
                 <Pagination.Last />
               </Pagination>
-            </Col>
+            </div>
           );
         })}
       </div>
@@ -851,7 +851,7 @@ export default function DashboardContent() {
                 objectFit="contain"
               />
             </div>
-            <b>Do you want to export:</b>
+            <span className="exportModalHeading">Do you want to export:</span>
             <br />
             <div className="expoModalCont">
               <Form.Check type="checkbox" label="All" />
