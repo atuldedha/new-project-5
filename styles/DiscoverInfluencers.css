@@ -55,10 +55,14 @@
 .ligBtn{
     background: #F1F4FF;
     color: #464E5F;
+    font-size: 12px;
+    font-weight: 500 !important;
     border: 0px;
 }
 .primBtn{
     background: #2D3779;
+    font-size: 12px;
+    font-weight: 500 !important;
 }
 .columContainer {
     min-width: 350px;

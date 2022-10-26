@@ -62,6 +62,8 @@ export default function DashboardContent() {
   // const handleContactClose = () => setContactShow(false);
   // const handleContactShow = () => setContactShow(true);
 
+  const [hover, setHover] = useState(false);
+
   const optionLabel = ["Product Designer", "UI", "App Design", "UX"];
   const [multiSelections, setMultiSelections] = useState([]);
 
@@ -238,7 +240,6 @@ export default function DashboardContent() {
   }
   console.log(formData);
   console.log(newFormData);
-
   return (
     <div className="mainContent">
       <div className="contentNav">
@@ -248,6 +249,8 @@ export default function DashboardContent() {
         </div>
         <div>
           <Button
+            onMouseEnter={() => setHover(true)}
+            onMouseLeave={() => setHover(false)}
             className={
               showFilter ? "outlinedBtn cmmBtn active" : "outlinedBtn cmmBtn"
             }
@@ -255,7 +258,11 @@ export default function DashboardContent() {
           >
             <div className="filterContent">
               <Image
-                src="/Images/slider.png"
+                src={
+                  hover || showFilter
+                    ? "/Images/sliderWhite.png"
+                    : "/Images/slider.png"
+                }
                 alt="filters"
                 width="18px"
                 height="18px"
