@@ -286,7 +286,9 @@ export default function DashboardContent() {
             onMouseEnter={() => setHover(true)}
             onMouseLeave={() => setHover(false)}
             className={
-              showFilter ? "outlinedBtn cmmBtn active" : "outlinedBtn cmmBtn"
+              showFilter
+                ? "outlinedBtn cmmBtn active filterBtn"
+                : "outlinedBtn cmmBtn filterBtn"
             }
             onClick={() => setShowFilter((prevState) => !prevState)}
           >
@@ -306,10 +308,13 @@ export default function DashboardContent() {
               <span className="filterText">Filter</span>
             </div>
           </Button>
-          <Button className="ligBtn cmmBtn" onClick={handleExportShow}>
+          <Button
+            className="ligBtn cmmBtn filterBtn"
+            onClick={handleExportShow}
+          >
             Export
           </Button>
-          <Button className="primBtn cmmBtn" onClick={handleShow}>
+          <Button className="primBtn cmmBtn filterBtn" onClick={handleShow}>
             Add Influencer
           </Button>
         </div>
@@ -394,22 +399,22 @@ export default function DashboardContent() {
                     </div>
                   );
                 })}
-                <Pagination>
-                  <Pagination.First />
-                  <Pagination.Item>{1}</Pagination.Item>
-                  <Pagination.Item>{2}</Pagination.Item>
-                  <Pagination.Item active>{3}</Pagination.Item>
-                  <Pagination.Ellipsis />
-                  <Pagination.Item>{32}</Pagination.Item>
-                  <Pagination.Last />
-                </Pagination>
               </div>
+              <Pagination>
+                <Pagination.First />
+                <Pagination.Item>{1}</Pagination.Item>
+                <Pagination.Item>{2}</Pagination.Item>
+                <Pagination.Item active>{3}</Pagination.Item>
+                <Pagination.Ellipsis />
+                <Pagination.Item>{32}</Pagination.Item>
+                <Pagination.Last />
+              </Pagination>
             </div>
           );
         })}
       </div>
 
-      <Modal show={show} onHide={handleClose}>
+      <Modal show={show} onHide={handleClose} className="addNewModalContainer">
         <Modal.Body className="addNewModal">
           <div className="actionCloseImage" onClick={handleClose}>
             <Image
@@ -420,111 +425,113 @@ export default function DashboardContent() {
               objectFit="contain"
             />
           </div>
-          <div className="addNewModalHeading">Add New Influencer</div>
-          <Form>
-            <Form.Group className="mb-3" controlId="formGroupEmail">
-              <Form.Label className="addNewModalFromValue">Username</Form.Label>
-              <Form.Control
-                onChange={handleNewInfluencer}
-                name="userName"
-                value={newFormData.userName}
-                type="text"
-                className="addNewModalTextField"
-                placeholder="@username"
-              />
-            </Form.Group>
-            <Form.Group as={Col} controlId="formGridState">
-              <Form.Label className="addNewModalFromValue">
-                Social Media
-              </Form.Label>
-              <Form.Select
-                className="addNewModalTextField"
-                onChange={handleNewInfluencer}
-                name="platform"
-                value={newFormData.platform}
-                defaultValue="Choose..."
-                placeholder="instagram, youtube"
-              >
-                <option>Instagram</option>
-                <option>Tiktok</option>
-                <option>Youtube</option>
-              </Form.Select>
-            </Form.Group>
-            <br />
-            <Form.Group className="mb-3" controlId="formGroupEmail">
-              <Form.Label className="addNewModalFromValue">
-                Followers
-              </Form.Label>
-              <Form.Control
-                onChange={handleNewInfluencer}
-                name="followers"
-                value={newFormData.followers}
-                type="text"
-                className="addNewModalTextField"
-                placeholder="Enter the number of followers"
-              />
-            </Form.Group>
-            <Form.Group
-              className="mb-3 addNewModalDiseaseWrapper"
-              controlId="formGroupEmail"
-            >
-              <Form.Label className="addNewModalFromValue">
-                Disease area
-              </Form.Label>
-              <Typeahead
-                id="basic-typeahead-single"
-                labelKey="diseaseArea"
-                options={options}
-                placeholder="UK, Fashion, Food"
-                onChange={(selected) =>
-                  setNewFormData((prevData) => ({
-                    ...prevData,
-                    diseaseArea: selected,
-                  }))
-                }
-                selected={newFormData.diseaseArea}
-                name="diseaseArea"
-              />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formGroupEmail">
-              <Form.Label className="addNewModalFromValue">
-                Email address
-              </Form.Label>
-              <Form.Control
-                onChange={handleNewInfluencer}
-                name="email"
-                value={newFormData.email}
-                type="email"
-                className="addNewModalTextField"
-                placeholder="Enter Email"
-              />
-            </Form.Group>
-            <Form.Group
-              className="mb-3 addNewModalCountryContainer"
-              controlId="formGroupEmail"
-            >
-              <Form.Label className="addNewModalFromValue">Country</Form.Label>
-              <Typeahead
-                id="basic-typeahead-single"
-                labelKey="name"
-                options={options}
-                placeholder="Select country"
-              />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formGroupEmail">
-              <Form.Label className="addNewModalFromValue">City</Form.Label>
-              <Form.Control
-                onChange={handleNewInfluencer}
-                name="city"
-                value={newFormData.city}
-                type="text"
-                className="addNewModalTextField"
-                placeholder="Please enter city name"
-              />
-            </Form.Group>
-          </Form>
+          <div className="addNewModalHeading">Add Influencer</div>
+          <div className="addNewModalFormContainer">
+            <div className="addNewModalFormLeft">
+              <Form>
+                <Form.Group className="mb-3" controlId="formGroupEmail">
+                  <Form.Label className="addNewModalFromValue">
+                    Username
+                  </Form.Label>
+                  <Form.Control
+                    onChange={handleNewInfluencer}
+                    name="userName"
+                    value={newFormData.userName}
+                    type="text"
+                    className="addNewModalTextField"
+                    placeholder="Enter username"
+                  />
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="formGroupEmail">
+                  <Form.Label className="addNewModalFromValue">
+                    Followers
+                  </Form.Label>
+                  <Form.Control
+                    onChange={handleNewInfluencer}
+                    name="followers"
+                    value={newFormData.followers}
+                    type="text"
+                    className="addNewModalTextField"
+                    placeholder="Enter followers"
+                  />
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="formGroupEmail">
+                  <Form.Label className="addNewModalFromValue">
+                    Email address
+                  </Form.Label>
+                  <Form.Control
+                    onChange={handleNewInfluencer}
+                    name="email"
+                    value={newFormData.email}
+                    type="email"
+                    className="addNewModalTextField"
+                    placeholder="Enter Email"
+                  />
+                </Form.Group>
+              </Form>
+            </div>
+            <div className="addNewModalFormRight">
+              <Form>
+                <Form.Group as={Col} controlId="formGridState" className="mb-3">
+                  <Form.Label className="addNewModalFromValue">
+                    Social Media
+                  </Form.Label>
+                  <Form.Select
+                    className="addNewModalTextField"
+                    onChange={handleNewInfluencer}
+                    name="platform"
+                    value={newFormData.platform}
+                  >
+                    <option>Select Social Media</option>
+                    <option>Instagram</option>
+                    <option>Tiktok</option>
+                    <option>Youtube</option>
+                  </Form.Select>
+                </Form.Group>
+                <Form.Group
+                  className="mb-3 addNewModalDiseaseWrapper"
+                  controlId="formGroupEmail"
+                >
+                  <Form.Label className="addNewModalFromValue">
+                    Disease area
+                  </Form.Label>
+                  <Typeahead
+                    id="basic-typeahead-single"
+                    labelKey="diseaseArea"
+                    options={options}
+                    placeholder="UK, Fashion, Food"
+                    onChange={(selected) =>
+                      setNewFormData((prevData) => ({
+                        ...prevData,
+                        diseaseArea: selected,
+                      }))
+                    }
+                    selected={newFormData.diseaseArea}
+                    name="diseaseArea"
+                  />
+                </Form.Group>
+                <Form.Group
+                  className="mb-3 addNewModalLocationContainer"
+                  controlId="formGroupEmail"
+                >
+                  <Form.Label className="addNewModalFromValue">
+                    Location
+                  </Form.Label>
+                  <Typeahead
+                    id="basic-typeahead-single"
+                    labelKey="name"
+                    options={options}
+                    placeholder="Select location"
+                    name="location"
+                    value={formData.location}
+                    onChange={handleChange}
+                  />
+                </Form.Group>
+              </Form>
+            </div>
+          </div>
           <Button className="primBtn cmmBtn addNewModalBtn">
-            Add New Influencer
+            Add Influencer
           </Button>
         </Modal.Body>
       </Modal>

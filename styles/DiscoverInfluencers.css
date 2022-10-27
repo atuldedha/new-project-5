@@ -33,6 +33,9 @@
     padding: 8px 20px;
     font-size: 12px;
 }
+.filterBtn {
+  font-size: 16px !important;
+}
 .filterContent {
     display: flex;
     align-items: center;
@@ -67,10 +70,10 @@
 .columContainer {
     min-width: 350px;
     margin-right: 20px;
+    border: 1px solid #E9F0FC;
 }
 .dataCard{
     background: #FFFFFF;
-    border: 1px solid #E9F0FC;
     border-radius: 6px;
     padding: 16px;
 }
@@ -188,7 +191,6 @@
  }
 
  .pagination{
-    margin-top: 20px;
     margin-left: 40px;
     width: 100%;
     color: #6D728E;
@@ -335,9 +337,23 @@
     padding: 0 36px !important;
   }
 
+  .addNewModalFormContainer {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    gap: 16px;
+  }
+  .addNewModalContainer .modal-dialog {
+    max-width: none;
+  }
+  .addNewModalFormLeft {
+    width: 50%;
+  }
+  .addNewModalFormRight {
+    width: 50%;
+  }
   .addNewModalHeading {
     font-size: 22px;
-    text-align: center;
   font-weight: 600;
   margin-top: 6px;
   margin-bottom: 28px;
@@ -355,6 +371,7 @@
     font-size: 14px !important;
     font-weight: 500 !important ;
     color: #9F9FB0 !important;
+    background-color: #FFFFFF !important;
   }
 
   .addNewModalBtn {
@@ -369,12 +386,14 @@
     font-size: 14px !important;
     font-weight: 500 !important;
     color: #9F9FB0 !important;
+    background: #FFFFFF !important;
   }
-  .addNewModalCountryContainer .form-control{
+  .addNewModalLocationContainer .form-control{
     padding: 14px 20px !important;
     font-size: 14px !important;
     font-weight: 500 !important;
     color: #9F9FB0 !important;
+    background: #FFFFFF !important;
   }
   .actdionModal{
     padding: 0 36px !important;
