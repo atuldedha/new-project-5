@@ -334,6 +334,13 @@
   .actdionModal{
     padding: 0 36px !important;
   }
+  .scheduleModal {
+    padding: 0 32px !important;
+  }
+
+  .optionsModal .modal-content {
+    width: 100%;
+  }
 .actionCloseImage {
   width: 100%;
     display: flex;
@@ -342,6 +349,9 @@
     align-items: center;
     justify-content: flex-end;
 }
+.actionCloseImage:hover{
+  cursor: pointer;
+}
   .actdionModal h2 {
     font-size: 20px;
     text-align: center;
@@ -349,7 +359,17 @@
     font-weight: 700;
     margin-bottom: 20px;
 }
-
+.emailModalSubject {
+  font-size: 14px;
+  font-weight: 600;
+  color: #7E839F;
+}
+.emailModalTextField {
+  padding: 14px 20px !important;
+}
+.emailModalTextArea{
+  padding: 12px 20px;
+}
 .actionModalHeading {
   font-size: 22px;
   font-weight: 600;
@@ -372,12 +392,33 @@
   margin-bottom: 36px;
   margin-right: 0 !important;
   font-size: 16px !important;
+  padding: 16px 20px !important;
 }
 .actionLabel{
     border: 1px solid #e9f0fc;
     border-radius: 4px;
     margin-top: 20px;
     padding: 20px;
+}
+
+.scheduleModalHeading {
+  margin-bottom: 20px;
+  font-size: 22px;
+  font-weight: 600;
+  margin-top: 2px;
+}
+
+.scheduleModalTextField{
+  padding: 12px !important;
+  color: #9F9FB0 !important;
+}
+
+.schedultBtn {
+  font-size: 14px !important;
+  padding: 14px 0 !important;
+  width: 100%;
+  margin-right: 0 !important;
+  margin-bottom: 32px;
 }
 
 .messageHeading {

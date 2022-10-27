@@ -46,7 +46,6 @@ export default function DashboardContent() {
   const [action, setAction] = useState();
 
   const [actionShow, setActionShow] = useState(false);
-  const handleActionClose = () => setActionShow(false);
   const handleActionShow = () => setActionShow(true);
 
   const [exportShow, setExportShow] = useState(false);
@@ -54,6 +53,11 @@ export default function DashboardContent() {
   const handleExportShow = () => setExportShow(true);
 
   const [actionContChoose, setActionContChoose] = useState("Default");
+  const handleActionClose = () => {
+    setActionShow(false);
+    setAction();
+    setActionContChoose("Default");
+  };
   // const [noteShow, setNoteShow] = useState(false);
   // const handleNoteClose = () => setNoteShow(false);
   // const handleNoteShow = () => setNoteShow(true);
@@ -673,10 +677,14 @@ export default function DashboardContent() {
 
       {/* actionModal */}
 
-      <Modal show={actionShow} onHide={handleActionClose}>
+      <Modal
+        show={actionShow}
+        onHide={handleActionClose}
+        className="optionsModal"
+      >
         {action === "Contact" && (
           <Modal.Body className="actdionModal">
-            <div className="actionCloseImage" onClick={handleExportClose}>
+            <div className="actionCloseImage" onClick={handleActionClose}>
               <Image
                 src="/Images/close.png"
                 alt="close"
@@ -705,6 +713,7 @@ export default function DashboardContent() {
                     type="text"
                     placeholder="Text"
                     style={{ backgroundColor: "#fff" }}
+                    className="emailModalTextArea"
                   />
                 </Form.Group>
                 <div className="btnRightCont">
@@ -716,30 +725,36 @@ export default function DashboardContent() {
               actionContChoose === "Email") && (
               <div className="actionDm">
                 <Form.Group className="mb-3" controlId="formGroupEmail">
-                  <Form.Label>Subject</Form.Label>
+                  <Form.Label className="emailModalSubject">Subject</Form.Label>
                   <Form.Control
                     type="text"
-                    placeholder="Enter message"
+                    placeholder="Enter Subject"
                     style={{ backgroundColor: "#fff" }}
+                    className="emailModalTextField"
                   />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formGroupEmail">
-                  <Form.Label>Receiver</Form.Label>
+                  <Form.Label className="emailModalSubject">
+                    Receiver
+                  </Form.Label>
                   <Form.Control
                     type="text"
-                    placeholder="Enter message"
+                    placeholder="name@company.com"
                     style={{ backgroundColor: "#fff" }}
+                    className="emailModalTextField"
                   />
                 </Form.Group>
                 <Form.Group
                   className="mb-3"
                   controlId="exampleForm.ControlTextarea1"
                 >
-                  <Form.Label>Message</Form.Label>
+                  <Form.Label className="emailModalSubject">Message</Form.Label>
                   <Form.Control
                     as="textarea"
-                    rows={4}
+                    rows={3}
                     style={{ backgroundColor: "#fff" }}
+                    placeholder="Text"
+                    className="emailModalTextArea"
                   />
                 </Form.Group>
                 <div className="btnRightCont">
@@ -799,28 +814,42 @@ export default function DashboardContent() {
         )}
 
         {action === "Schedule" && (
-          <Modal.Body className="actdionModal">
-            <h2>Schedule</h2>
+          <Modal.Body className="scheduleModal">
+            <div className="actionCloseImage" onClick={handleActionClose}>
+              <Image
+                src="/Images/close.png"
+                alt="close"
+                width="10px"
+                height="10px"
+                objectFit="contain"
+              />
+            </div>
+            <div className="scheduleModalHeading">Schedule</div>
             <Form.Group className="mb-3" controlId="formGroupEmail">
-              <Form.Label>Subject</Form.Label>
+              <Form.Label className="emailModalSubject">Title</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Enter message"
+                placeholder="Add Title"
+                className="scheduleModalTextField"
                 style={{ backgroundColor: "#fff" }}
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formGroupEmail">
-              <Form.Label>Type</Form.Label>
-              <Form.Select defaultValue="Choose...">
-                <option>--- Please Select ---</option>
+              <Form.Label className="emailModalSubject">Type</Form.Label>
+              <Form.Select
+                defaultValue="Choose..."
+                className="scheduleModalTextField"
+              >
+                <option>Please Select</option>
                 <option>Meeting</option>
                 <option>Task</option>
                 <option>Reminder</option>
               </Form.Select>
             </Form.Group>
             <Form.Group className="mb-3" controlId="formGroupEmail">
-              <Form.Label>Time</Form.Label>
+              <Form.Label className="emailModalSubject">Time</Form.Label>
               <DatePicker
+                className="scheduleModalTextField"
                 selected={startDate}
                 onChange={(date) => setStartDate(date)}
                 locale="pt-BR"
@@ -831,27 +860,33 @@ export default function DashboardContent() {
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formGroupEmail">
-              <Form.Label>Add Influencers</Form.Label>
+              <Form.Label className="emailModalSubject">
+                Add Influencers
+              </Form.Label>
               <Typeahead
                 id="basic-typeahead-multiple"
                 labelKey="name"
                 multiple
                 onChange={setMultiSelections}
                 options={options}
-                placeholder="--- Please Select ---"
+                placeholder="Please Select"
                 selected={multiSelections}
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formGroupEmail">
-              <Form.Label>Add Description</Form.Label>
+              <Form.Label className="emailModalSubject">
+                Add Description
+              </Form.Label>
               <Form.Control
                 as="textarea"
-                rows={3}
+                placeholder="Add description"
+                className="scheduleModalTextField"
+                rows={2}
                 style={{ backgroundColor: "#fff" }}
               />
             </Form.Group>
             <div className="btnRightCont">
-              <Button className="primBtn cmmBtn sendBtn">Schedule</Button>
+              <Button className="primBtn cmmBtn schedultBtn">Save</Button>
             </div>
           </Modal.Body>
         )}
