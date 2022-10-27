@@ -167,13 +167,13 @@ export default function DashboardContent() {
   });
 
   const [newFormData, setNewFormData] = useState({
-    firstName: "",
-    lastName: "",
     userName: "",
     platform: "",
     email: "",
     diseaseArea: [],
     location: "",
+    followers: "",
+    city: "",
   });
 
   const [filterData, setFilterData] = useState({
@@ -227,8 +227,20 @@ export default function DashboardContent() {
       };
     });
   }
-
-  function handleAction(actionType) {
+  const [subData, setSubData] = useState(Array(6).fill(1));
+  function handleAction(actionType, position, index) {
+    console.log(position, index);
+    if (actionType === "Remove") {
+      return data.map((d, i) => {
+        if (i === position) {
+          setSubData(
+            subData.filter((e, f) => {
+              return f !== index;
+            })
+          );
+        }
+      });
+    }
     handleActionShow();
     setAction(actionType);
   }
@@ -242,6 +254,24 @@ export default function DashboardContent() {
     });
     console.log(name);
   }
+
+  const [previousComments, setPreviousComments] = useState([
+    "All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.",
+    "Cicero are also reproduced in their exact original form",
+  ]);
+  const [editing, setEditing] = useState(false);
+  const handlePreviousCommentAction = (actionName, position) => {
+    if (actionName === "remove") {
+      setPreviousComments(
+        previousComments.filter((comment, index) => {
+          return index !== position;
+        })
+      );
+    }
+    if (actionName === "edit") {
+      setEditing(true);
+    }
+  };
   console.log(formData);
   console.log(newFormData);
   return (
@@ -286,9 +316,9 @@ export default function DashboardContent() {
       </div>
       {showFilter && <DiscoverInfluencerFilterDetail />}
       <div className="rowContainer">
-        {data.map((d, index) => {
+        {data.map((d, position) => {
           return (
-            <div className="columContainer" key={index}>
+            <div className="columContainer" key={position}>
               <div className="dataCard">
                 <div className="spanWrapper">
                   <span className="s1">
@@ -296,7 +326,7 @@ export default function DashboardContent() {
                   </span>
                 </div>
 
-                {[1, 2, 3, 4, 5, 6].map((a, index) => {
+                {subData.map((a, index) => {
                   return (
                     <div
                       key={index}
@@ -352,7 +382,9 @@ export default function DashboardContent() {
                               Schedule
                             </Dropdown.Item>
                             <Dropdown.Item
-                              onClick={() => handleAction("Remove")}
+                              onClick={() =>
+                                handleAction("Remove", position, index)
+                              }
                             >
                               Remove
                             </Dropdown.Item>
@@ -378,48 +410,41 @@ export default function DashboardContent() {
       </div>
 
       <Modal show={show} onHide={handleClose}>
-        <Modal.Body className="campModal">
-          <h2>Add New Influencer</h2>
+        <Modal.Body className="addNewModal">
+          <div className="actionCloseImage" onClick={handleClose}>
+            <Image
+              src="/Images/close.png"
+              alt="close"
+              width="10px"
+              height="10px"
+              objectFit="contain"
+            />
+          </div>
+          <div className="addNewModalHeading">Add New Influencer</div>
           <Form>
             <Form.Group className="mb-3" controlId="formGroupEmail">
-              <Form.Label>Username</Form.Label>
+              <Form.Label className="addNewModalFromValue">Username</Form.Label>
               <Form.Control
                 onChange={handleNewInfluencer}
                 name="userName"
                 value={newFormData.userName}
                 type="text"
-                placeholder="Enter Username"
-              />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formGroupEmail">
-              <Form.Label>First Name</Form.Label>
-              <Form.Control
-                onChange={handleNewInfluencer}
-                name="firstName"
-                value={newFormData.firstName}
-                type="text"
-                placeholder="Enter First Name"
-              />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formGroupEmail">
-              <Form.Label>Last Name</Form.Label>
-              <Form.Control
-                onChange={handleNewInfluencer}
-                name="lastName"
-                value={newFormData.lastName}
-                type="text"
-                placeholder="Last Name"
+                className="addNewModalTextField"
+                placeholder="@username"
               />
             </Form.Group>
             <Form.Group as={Col} controlId="formGridState">
-              <Form.Label>Platform</Form.Label>
+              <Form.Label className="addNewModalFromValue">
+                Social Media
+              </Form.Label>
               <Form.Select
+                className="addNewModalTextField"
                 onChange={handleNewInfluencer}
                 name="platform"
                 value={newFormData.platform}
                 defaultValue="Choose..."
+                placeholder="instagram, youtube"
               >
-                <option>--- Please Select ---</option>
                 <option>Instagram</option>
                 <option>Tiktok</option>
                 <option>Youtube</option>
@@ -427,12 +452,30 @@ export default function DashboardContent() {
             </Form.Group>
             <br />
             <Form.Group className="mb-3" controlId="formGroupEmail">
-              <Form.Label>Disease area</Form.Label>
+              <Form.Label className="addNewModalFromValue">
+                Followers
+              </Form.Label>
+              <Form.Control
+                onChange={handleNewInfluencer}
+                name="followers"
+                value={newFormData.followers}
+                type="text"
+                className="addNewModalTextField"
+                placeholder="Enter the number of followers"
+              />
+            </Form.Group>
+            <Form.Group
+              className="mb-3 addNewModalDiseaseWrapper"
+              controlId="formGroupEmail"
+            >
+              <Form.Label className="addNewModalFromValue">
+                Disease area
+              </Form.Label>
               <Typeahead
                 id="basic-typeahead-single"
                 labelKey="diseaseArea"
                 options={options}
-                placeholder="--- Please Select ---"
+                placeholder="UK, Fashion, Food"
                 onChange={(selected) =>
                   setNewFormData((prevData) => ({
                     ...prevData,
@@ -444,26 +487,43 @@ export default function DashboardContent() {
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formGroupEmail">
-              <Form.Label>Email address</Form.Label>
+              <Form.Label className="addNewModalFromValue">
+                Email address
+              </Form.Label>
               <Form.Control
                 onChange={handleNewInfluencer}
                 name="email"
                 value={newFormData.email}
                 type="email"
-                placeholder="Enter Email address"
+                className="addNewModalTextField"
+                placeholder="Enter Email"
               />
             </Form.Group>
-            <Form.Group className="mb-3" controlId="formGroupEmail">
-              <Form.Label>Location</Form.Label>
+            <Form.Group
+              className="mb-3 addNewModalCountryContainer"
+              controlId="formGroupEmail"
+            >
+              <Form.Label className="addNewModalFromValue">Country</Form.Label>
               <Typeahead
                 id="basic-typeahead-single"
                 labelKey="name"
                 options={options}
-                placeholder="--- Please Select ---"
+                placeholder="Select country"
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formGroupEmail">
+              <Form.Label className="addNewModalFromValue">City</Form.Label>
+              <Form.Control
+                onChange={handleNewInfluencer}
+                name="city"
+                value={newFormData.city}
+                type="text"
+                className="addNewModalTextField"
+                placeholder="Please enter city name"
               />
             </Form.Group>
           </Form>
-          <Button className="primBtn cmmBtn" style={{ width: "100%" }}>
+          <Button className="primBtn cmmBtn addNewModalBtn">
             Add New Influencer
           </Button>
         </Modal.Body>
@@ -694,14 +754,15 @@ export default function DashboardContent() {
               />
             </div>
             <div className="actionModalHeading">Contact @username</div>
+            <Form.Label className="messageHeading messageSelection">
+              Method
+            </Form.Label>
             <Form.Select
               onChange={(e) => setActionContChoose(e.target.value)}
               defaultValue="Choose..."
-              className="messageSelection"
             >
-              <option>Please Select</option>
-              <option>Direct Message</option>
               <option>Email</option>
+              <option>Direct Message</option>
             </Form.Select>
             {actionContChoose === "Direct Message" && (
               <div className="actionDm">
@@ -739,7 +800,7 @@ export default function DashboardContent() {
                   </Form.Label>
                   <Form.Control
                     type="text"
-                    placeholder="name@company.com"
+                    placeholder="Enter Email"
                     style={{ backgroundColor: "#fff" }}
                     className="emailModalTextField"
                   />
@@ -753,7 +814,7 @@ export default function DashboardContent() {
                     as="textarea"
                     rows={3}
                     style={{ backgroundColor: "#fff" }}
-                    placeholder="Text"
+                    placeholder="Enter Message"
                     className="emailModalTextArea"
                   />
                 </Form.Group>
@@ -766,35 +827,113 @@ export default function DashboardContent() {
         )}
 
         {action === "Note" && (
-          <Modal.Body className="actdionModal">
-            <h2>Note</h2>
+          <Modal.Body className="scheduleModal">
+            <div className="actionCloseImage" onClick={handleActionClose}>
+              <Image
+                src="/Images/close.png"
+                alt="close"
+                width="10px"
+                height="10px"
+                objectFit="contain"
+              />
+            </div>
+            <div className="scheduleModalHeading">Note</div>
+            <Form.Label className="emailModalSubject">Type</Form.Label>
             <Form.Select
               onChange={(e) => setActionContChoose(e.target.value)}
               defaultValue="Choose..."
+              className="noteModalTextField"
             >
-              <option>--- Please Select ---</option>
               <option>Comment</option>
               <option>Label</option>
             </Form.Select>
             {(actionContChoose === "Default" ||
               actionContChoose === "Comment") && (
-              <div className="actionDm">
+              <div>
+                <Form.Label className="scheduleModalSubject">
+                  Comment
+                </Form.Label>
                 <Form.Group className="mb-3" controlId="formGroupEmail">
                   <Form.Control
+                    className="emailModalTextArea"
                     as="textarea"
-                    rows={4}
+                    placeholder="write comment"
+                    rows={3}
                     style={{ backgroundColor: "#fff" }}
                   />
                 </Form.Group>
+
+                {previousComments.length > 0 ? (
+                  <div className="noteModalPreviousWrapper">
+                    <Form.Label className="emailModalSubject">
+                      Previous Comments
+                    </Form.Label>
+                    {previousComments.map((comment, index) => (
+                      <div className="noteModalPreviousCommentWrapper">
+                        <div className="noteModalPreviousCommentLeftContent">
+                          {comment}
+                        </div>
+                        <div
+                          className="info noteModalDropdown"
+                          onClick={handleEditClose}
+                          style={{ flexDirection: "row", alignItems: "center" }}
+                        >
+                          <DropdownButton
+                            variant="link"
+                            id="dropdown-basic-button"
+                            title={<BsThreeDotsVertical />}
+                          >
+                            <Dropdown.Item
+                              onClick={() =>
+                                handlePreviousCommentAction("edit", index)
+                              }
+                            >
+                              Edit
+                            </Dropdown.Item>
+                            <Dropdown.Item
+                              onClick={() =>
+                                handlePreviousCommentAction("remove", index)
+                              }
+                            >
+                              Remove
+                            </Dropdown.Item>
+                          </DropdownButton>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ) : null}
                 <div className="btnRightCont">
-                  <Button className="primBtn cmmBtn sendBtn">Add Text</Button>
+                  <Button className="primBtn cmmBtn noteModalBtn">
+                    Add Text
+                  </Button>
                 </div>
               </div>
             )}
             {actionContChoose === "Label" && (
-              <div className="actionLabel">
-                <Form.Group className="mb-3" controlId="formGridState">
-                  <Form.Label>Add Label</Form.Label>
+              <div className="noteModalGroup">
+                <Form.Group className="labelGroup" controlId="formGridState">
+                  <Form.Label className="noteModalSelection">
+                    Existing labels:
+                  </Form.Label>
+                  {optionLabel?.length > 3 ? (
+                    <>
+                      <Form.Label className="noteModalOptions">{`${optionLabel[0]}`}</Form.Label>
+                      <span className="noteModalSelection">, </span>
+                      <Form.Label className="noteModalOptions">{`${optionLabel[1]}`}</Form.Label>
+                      <span className="noteModalSelection">, </span>
+                      <Form.Label className="noteModalOptions">{`${optionLabel[2]}`}</Form.Label>
+                    </>
+                  ) : (
+                    optionLabel.map((label) => {
+                      <>
+                        <Form.Label className="noteModalOptions">
+                          {label}
+                        </Form.Label>
+                        <span className="noteModalSelection">, </span>
+                      </>;
+                    })
+                  )}
                   <Typeahead
                     defaultSelected={optionLabel.slice(0, 1)}
                     id="public-methods-example"
@@ -806,7 +945,7 @@ export default function DashboardContent() {
                   />
                 </Form.Group>
                 <div className="btnRightCont">
-                  <Button className="primBtn cmmBtn sendBtn">Save</Button>
+                  <Button className="primBtn cmmBtn schedultBtn">Save</Button>
                 </div>
               </div>
             )}
@@ -846,8 +985,11 @@ export default function DashboardContent() {
                 <option>Reminder</option>
               </Form.Select>
             </Form.Group>
-            <Form.Group className="mb-3" controlId="formGroupEmail">
-              <Form.Label className="emailModalSubject">Time</Form.Label>
+            <Form.Group
+              className="mb-3 scheduleDateGroup"
+              controlId="formGroupEmail"
+            >
+              <Form.Label className="emailModalSubject">Date & Time</Form.Label>
               <DatePicker
                 className="scheduleModalTextField"
                 selected={startDate}
@@ -859,10 +1001,11 @@ export default function DashboardContent() {
                 dateFormat="Pp"
               />
             </Form.Group>
-            <Form.Group className="mb-3" controlId="formGroupEmail">
-              <Form.Label className="emailModalSubject">
-                Add Influencers
-              </Form.Label>
+            <Form.Group
+              className="mb-3 scheduleModalInfluenersGroup"
+              controlId="formGroupEmail"
+            >
+              <Form.Label className="emailModalSubject">Influencers</Form.Label>
               <Typeahead
                 id="basic-typeahead-multiple"
                 labelKey="name"
@@ -874,9 +1017,7 @@ export default function DashboardContent() {
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formGroupEmail">
-              <Form.Label className="emailModalSubject">
-                Add Description
-              </Form.Label>
+              <Form.Label className="emailModalSubject">Description</Form.Label>
               <Form.Control
                 as="textarea"
                 placeholder="Add description"

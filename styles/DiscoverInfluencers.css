@@ -331,6 +331,51 @@
     opacity: .5;
   }
 
+  .addNewModal {
+    padding: 0 36px !important;
+  }
+
+  .addNewModalHeading {
+    font-size: 22px;
+    text-align: center;
+  font-weight: 600;
+  margin-top: 6px;
+  margin-bottom: 28px;
+  color: #2D3779;
+  }
+
+  .addNewModalFromValue {
+    font-size: 14px;
+    font-weight: 600;
+    color: #7E839F;
+  }
+
+  .addNewModalTextField {
+    padding: 14px 20px !important;
+    font-size: 14px !important;
+    font-weight: 500 !important ;
+    color: #9F9FB0 !important;
+  }
+
+  .addNewModalBtn {
+    width: 100%;
+    padding: 16px 0 !important;
+    font-size: 16px !important;
+    margin-bottom: 36px;
+  }
+
+  .addNewModalDiseaseWrapper .form-control{
+    padding: 14px 20px !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    color: #9F9FB0 !important;
+  }
+  .addNewModalCountryContainer .form-control{
+    padding: 14px 20px !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    color: #9F9FB0 !important;
+  }
   .actdionModal{
     padding: 0 36px !important;
   }
@@ -374,12 +419,17 @@
   font-size: 22px;
   font-weight: 600;
   margin-top: 6px;
+  color: #2D3779;
 }
 .messageSelection {
   margin-top: 16px;
 }
 .actionDm{
     margin-top: 32px;
+}
+.noteModalTextField {
+  padding: 12px !important;
+  background-color: #FFFFFF !important;
 }
 
 .actionDm .btnRightCont, .actionLabel .btnRightCont, .btnRightCont{
@@ -406,11 +456,13 @@
   font-size: 22px;
   font-weight: 600;
   margin-top: 2px;
+  color: #2D3779;
 }
 
 .scheduleModalTextField{
   padding: 12px !important;
   color: #9F9FB0 !important;
+  background: #FFFFFF !important;
 }
 
 .schedultBtn {
@@ -427,6 +479,92 @@
   color: #7E839F !important;
 }
 
+.noteModalGroup {
+  margin-top: 12px;
+}
+.noteModalSelection {
+  font-size: 12px;
+  font-weight: 400;
+  color: #7E839F;
+  margin-right: 4px;
+}
+.labelGroup {
+  margin-bottom: 20px;
+}
+.labelGroup .form-control {
+  padding: 4px;
+}
+.labelGroup .form-control .rbt-token {
+  padding: 8px 10px;
+}
+.noteModalOptions {
+  font-size: 12px;
+  font-weight: 400;
+  color: #448DC9 !important;
+  border-bottom: 1px solid #448DC9;
+
+}
+
+.noteModalPreviousCommentWrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: #F8F9FD;
+  margin-bottom: 8px;
+  padding: 12px;
+  border-radius: 2px;
+}
+
+.noteModalPreviousWrapper {
+  height: 150px;
+  overflow-y: scroll;
+  margin-bottom: 20px;
+}
+.noteModalPreviousCommentLeftContent {
+  flex-grow: 1;
+  font-size: 11px;
+  font-weight: 400;
+  color: #363C48;
+}
+.noteModalDropdown {
+  margin-left: 16px;
+}
+.noteModalPreviousCommentWrapper .dropdown-toggle {
+  background: #FFFFFF;
+  padding: 3px 5px;
+  color: #464E5F;
+  font-size: 18px;
+  border: 0px;
+  font-weight: 600;
+}
+.noteModalBtn {
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  padding: 14px 0 !important;
+  width: 100%;
+  margin-bottom: 32px;
+}
+
+.noteModalPreviousCommentWrapper .dropdown-toggle::after{
+  content: none;
+}
+.noteModalEdit {
+  background-color: #F8F9FD !important;
+}
+.scheduleDateGroup .react-datepicker-popper {
+  z-index: 4;
+}
+
+.scheduleModalInfluenersGroup .form-control {
+  background: #FFFFFF !important;
+  padding: 12px;
+}
+.scheduleModalSubject {
+  margin-top: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #7E839F;
+}
 .modal-dialog {
     display: flex;
     align-items: center;
