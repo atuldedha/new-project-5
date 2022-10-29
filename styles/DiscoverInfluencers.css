@@ -650,3 +650,18 @@
     border: 0px;
     font-weight: 600;
 }
+
+.timeCont {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 1em;
+}
+
+.timeCont .time_picker_container {
+    width: 300px;
+}
+
+.timeCont .modal_container {
+    width: 300px;
+}

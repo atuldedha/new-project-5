@@ -23,7 +23,12 @@ import "react-datepicker/dist/react-datepicker.css";
 import Image from "next/image";
 import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css";
-import { Calendar, DateRangePicker } from "react-date-range";
+import { Calendar, DateRange, DateRangePicker } from "react-date-range";
+import TimePicker from "react-times";
+
+// use material theme
+import "react-times/css/material/default.css";
+
 import {
   FaLocationArrow,
   FaMapMarked,
@@ -277,23 +282,26 @@ export default function DashboardContent() {
   };
   console.log(formData);
   console.log(newFormData);
-  const [beginDate, setBeginDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date());
+  const [beginDate, setBeginDate] = useState(new Date().toLocaleDateString());
   const [openDatePicker, setOpenDatePicker] = useState(false);
-  const selectionRange = {
-    startDate: beginDate,
-    endDate: endDate,
-    key: "selection",
-  };
+  const [startTime, setStartTime] = useState("12:00");
+  const [endTime, setEndTime] = useState("12:00");
 
-  const handleSelect = (ranges) => {
-    setBeginDate(ranges.selection.startDate);
-    setEndDate(ranges.selection.endDate);
+  const handleSelect = (event) => {
+    setBeginDate(new Date(event).toLocaleDateString());
     setOpenDatePicker(false);
   };
 
   const openDateRange = () => {
     setOpenDatePicker(true);
+  };
+
+  const handleStartTimeChange = (event) => {
+    setStartTime(event.hour + ":" + event.minute);
+  };
+
+  const handleEndTimeChange = (event) => {
+    setEndTime(event.hour + ":" + event.minute);
   };
   return (
     <div className="mainContent">
@@ -1017,37 +1025,33 @@ export default function DashboardContent() {
               className="mb-3 scheduleDateGroup"
               controlId="formGroupEmail"
             >
-              <Form.Label className="emailModalSubject">
-                Start Date & End Date
-              </Form.Label>
+              <Form.Label className="emailModalSubject">Start Date</Form.Label>
               <Form.Control
                 type="text"
-                value={`${beginDate.toLocaleDateString()}, ${endDate.toLocaleDateString()}`}
+                value={`${beginDate}`}
                 style={{ backgroundColor: "#fff" }}
                 className="emailModalTextField"
                 onClick={openDateRange}
               />
-              {/* <DatePicker
-                className="scheduleModalTextField"
-                selected={startDate}
-                onChange={(date) => setStartDate(date)}
-                locale="pt-BR"
-                showTimeSelect
-                timeFormat="p"
-                timeIntervals={15}
-                dateFormat="Pp"
-              /> */}
               {openDatePicker && (
                 <div className="date">
-                  <DateRangePicker
-                    ranges={[selectionRange]}
-                    onChange={handleSelect}
-                    editableDateInputs={true}
-                    minDate={new Date()}
-                    fixedHeight={true}
-                  />
+                  <Calendar onChange={handleSelect} minDate={new Date()} />
                 </div>
               )}
+              <div className="timeCont">
+                <Form.Label className="emailModalSubject">
+                  Start Time
+                </Form.Label>
+                <TimePicker
+                  time={startTime}
+                  // onFocusChange={this.onFocusChange.bind(this)}
+                  onTimeChange={handleStartTimeChange}
+                />
+              </div>
+              <div className="timeCont">
+                <Form.Label className="emailModalSubject">End Time</Form.Label>
+                <TimePicker time={endTime} onTimeChange={handleEndTimeChange} />
+              </div>
             </Form.Group>
             <Form.Group
               className="mb-3 scheduleModalInfluenersGroup"

@@ -22,6 +22,7 @@
     "chart.js": "^3.9.1",
     "fullcalendar": "^5.11.3",
     "moment": "^2.29.4",
+    "moment-timezone": "^0.5.38",
     "next": "12.3.1",
     "next-transpile-modules": "^9.1.0",
     "react": "18.2.0",
@@ -34,7 +35,9 @@
     "react-dom": "^18.2.0",
     "react-file-base64": "^1.0.3",
     "react-icons": "^4.4.0",
-    "react-router-dom": "^6.4.2"
+    "react-router-dom": "^6.4.2",
+    "react-time-picker-input": "^2.0.10",
+    "react-times": "^3.1.12"
   },
   "devDependencies": {
     "@faker-js/faker": "^7.6.0",
