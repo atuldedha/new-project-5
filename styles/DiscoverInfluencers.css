@@ -668,9 +668,18 @@
 }
 
 .timeCont .time_picker_container {
-    width: 300px;
+    width: 180px;
 }
 
 .timeCont .modal_container {
     width: 300px;
+}
+.checkboxCont {
+    margin-top: 1em;
+    display: flex;
+    align-items: center;
+}
+
+.checkboxCont .emailModalSubject{
+    margin-right: 8px;
 }

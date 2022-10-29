@@ -76,7 +76,12 @@ export default function DashboardContent() {
 
   const [hover, setHover] = useState(false);
 
-  const optionLabel = ["Product Designer", "UI", "App Design", "UX"];
+  const [optionLabel, setOptionLabel] = useState([
+    "Product Designer",
+    "UI",
+    "App Design",
+    "UX",
+  ]);
   const [multiSelections, setMultiSelections] = useState([]);
 
   const data = [
@@ -280,13 +285,14 @@ export default function DashboardContent() {
       setEditing(true);
     }
   };
-  console.log(formData);
-  console.log(newFormData);
+
   const [beginDate, setBeginDate] = useState(new Date().toLocaleDateString());
   const [openDatePicker, setOpenDatePicker] = useState(false);
   const [startTime, setStartTime] = useState("12:00");
   const [endTime, setEndTime] = useState("12:00");
   const [commentText, setCommentText] = useState("");
+  const calendarRef = useRef();
+  const [allDay, setAllDay] = useState(false);
 
   const handleSelect = (event) => {
     setBeginDate(new Date(event).toLocaleDateString());
@@ -309,6 +315,33 @@ export default function DashboardContent() {
     setPreviousComments([...previousComments, commentText]);
     setCommentText("");
     handleActionClose();
+  };
+  const handleLabelChange = (event) => {
+    console.log(event);
+    // event?.map((item) => {
+    //   if (item.customOption) {
+    //     if (!optionLabel.find((label) => label === item.name)) {
+    //       setOptionLabel([...optionLabel, item.name]);
+    //     }
+    //   }
+    // });
+  };
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (calendarRef.current && !calendarRef.current.contains(event.target)) {
+        setOpenDatePicker(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [calendarRef]);
+
+  const handleAllDayCheck = (event) => {
+    console.log(event);
+    setAllDay(event.target.checked);
   };
   return (
     <div className="mainContent">
@@ -984,10 +1017,13 @@ export default function DashboardContent() {
                   <Typeahead
                     defaultSelected={optionLabel.slice(0, 1)}
                     id="public-methods-example"
+                    allowNew
+                    onChange={handleLabelChange}
                     labelKey="name"
                     multiple
                     options={optionLabel}
                     placeholder="Add Label"
+                    newSelectionPrefix="Add a new label: "
                     ref={ref}
                   />
                 </Form.Group>
@@ -1036,7 +1072,7 @@ export default function DashboardContent() {
               className="mb-3 scheduleDateGroup"
               controlId="formGroupEmail"
             >
-              <Form.Label className="emailModalSubject">Start Date</Form.Label>
+              <Form.Label className="emailModalSubject">Date</Form.Label>
               <Form.Control
                 type="text"
                 value={`${beginDate}`}
@@ -1045,23 +1081,25 @@ export default function DashboardContent() {
                 onClick={openDateRange}
               />
               {openDatePicker && (
-                <div className="date">
+                <div className="date" ref={calendarRef}>
                   <Calendar onChange={handleSelect} minDate={new Date()} />
                 </div>
               )}
               <div className="timeCont">
-                <Form.Label className="emailModalSubject">
-                  Start Time
-                </Form.Label>
+                <Form.Label className="emailModalSubject">Time</Form.Label>
                 <TimePicker
                   time={startTime}
-                  // onFocusChange={this.onFocusChange.bind(this)}
                   onTimeChange={handleStartTimeChange}
                 />
-              </div>
-              <div className="timeCont">
-                <Form.Label className="emailModalSubject">End Time</Form.Label>
                 <TimePicker time={endTime} onTimeChange={handleEndTimeChange} />
+              </div>
+              <div className="checkboxCont">
+                <span className="emailModalSubject">{"All Day "}</span>
+                <Form.Check
+                  type="checkbox"
+                  checked={allDay}
+                  onChange={handleAllDayCheck}
+                />
               </div>
             </Form.Group>
             <Form.Group
