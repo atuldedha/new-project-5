@@ -16,13 +16,13 @@
 
 .contentNav .heading h2{
     font-weight: 600;
-    font-size: 20px;
+    font-size: 16px;
     color: #2D3779;
 }
 
 .contentNav .heading span{
     font-weight: 500;
-    font-size: 16px;
+    font-size: 13px;
     color: #B5B5C3;
 }
 
@@ -31,6 +31,17 @@
     border-radius: 6px;
     font-weight: 600;
     padding: 8px 20px;
+    font-size: 12px;
+}
+.filterBtn {
+  font-size: 16px !important;
+}
+.filterContent {
+    display: flex;
+    align-items: center;
+}
+.filterText {
+    margin-left: 4px;
 }
 .outlinedBtn{
     border: 1px solid #E9F0FC;
@@ -38,36 +49,43 @@
     color: #313C5E;
 }
 
-
-.outlinedBtn img{
-    margin-right: 5px;
-}
-
 .outlinedBtn:hover{
     background-color: #448DC9;
-    border: 0px;
+    border: 1px solid #448DC9;
     color: #fff;
 }
 
 .ligBtn{
     background: #F1F4FF;
-    color: #313C5E;
+    color: #464E5F;
+    font-size: 12px;
+    font-weight: 500 !important;
     border: 0px;
 }
 .primBtn{
     background: #2D3779;
+    font-size: 12px;
+    font-weight: 500 !important;
 }
-
+.columContainer {
+    min-width: 350px;
+    margin-right: 20px;
+    border: 1px solid #E9F0FC;
+}
 .dataCard{
     background: #FFFFFF;
-    border: 1px solid #E9F0FC;
     border-radius: 6px;
-    padding: 20px;
+    padding: 16px;
+}
+
+.spanWrapper {
+  margin-bottom: 16px;
 }
 
 .dataCard .s1{
     color: #2D3779;
     font-weight: 500;
+    font-size: 14px;
 }
 
 .dataCard .s2{
@@ -78,7 +96,7 @@
 .singleData{
     display: flex;
     flex-direction: row;
-    margin-top: 10px;
+    margin-bottom: 8px;
     background: #FFFFFF;
     border: 1px solid #E9F0FC;
     padding: 5px 8px;
@@ -88,11 +106,12 @@
     width: 100%;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
 }
 .innerDataCard .user{
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
     margin: 0px 8px;
     float: left;
 }
@@ -100,9 +119,13 @@
 .innerDataCard .user span{
     color: #2D3779;
     font-weight: 500;
-    font-size: 15px;
+    font-size: 12px;
+    white-space: nowrap;
  }
-
+.userContainer {
+    display: flex;
+    flex-direction: row;
+}
 .innerDataCard .user a{
    text-decoration: none;
    display: flex;
@@ -118,12 +141,44 @@
     margin-left: 2px;
     float: right;
 }
-
 .innerDataCard .info span{
     color: #2D3779;
     font-weight: 500;
     font-size: 15px;
 
+ }
+.container {
+    display: flex;
+    align-items: center;
+}
+
+.dash {
+    margin: 0 9px;
+}
+.form-check-label {
+    font-size: 12px;
+    font-weight: 600;
+}
+ .rowContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    overflow-x: scroll;
+ }
+.rowContainer::-webkit-scrollbar {
+    height: 5px;
+    margin: 6px 0;
+  }
+   
+  .rowContainer::-webkit-scrollbar-thumb {
+    background-color: #E5E7F2;
+  }
+
+ .clearFilterText {
+    font-size: 12px;
+    font-weight: 600;
+    color: #7E839F;
  }
 
  .innerDataCard .info a{
@@ -136,7 +191,6 @@
  }
 
  .pagination{
-    margin-top: 20px;
     margin-left: 40px;
     width: 100%;
     color: #6D728E;
@@ -182,8 +236,65 @@
     flex-direction: row;
   
     align-items: center;
+    justify-content: space-between;
+    margin-bottom: 19px;
   }
-  
+  .imageContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .followingContainer {
+    padding: 2px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+  .rateContainer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: max-content;
+    padding: 2px;
+    border-radius: 4px;
+  }
+  .bgGreen {
+    background: rgba(47, 209, 198, 0.25);
+  }
+  .bgRed {
+    background: rgba(255, 58, 58, 0.25);
+  }
+  .rate {
+    font-size: 10px;
+    font-weight: 600;
+    line-height: 12px;
+  }
+  .textGreen {
+    color: #2FD1C6;
+  }
+  .textRed {
+    color: #E53B3B;
+  }
+  .time{
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 12px;
+    color: #A9AECD;
+    text-align: end;
+  }
+  .dataContainer {
+    display: flex;
+    align-items: center;
+    margin: 0 0 16px 16px;
+  }
+  .dataText {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 24px;
+    margin-left: 6px;
+    color: #2D3779;
+  }
   .instaBg{
     border-radius: 50%;
     padding: 10px 10px;
@@ -210,15 +321,8 @@
   
   .socialData{
     margin: 20px 0px;
+    width: 100%;
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-  }
-  
-  .socialData span{
-    font-weight: 700;
-    font-size: 22px;
-    color: #2D3779;
   }
 
   .draggable {
@@ -229,10 +333,89 @@
     opacity: .5;
   }
 
-  .actdionModal{
-    padding: 20px;
+  .addNewModal {
+    padding: 0 36px !important;
   }
 
+  .addNewModalFormContainer {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    gap: 16px;
+  }
+  .addNewModalContainer .modal-dialog {
+    max-width: none;
+  }
+  .addNewModalFormLeft {
+    width: 50%;
+  }
+  .addNewModalFormRight {
+    width: 50%;
+  }
+  .addNewModalHeading {
+    font-size: 22px;
+  font-weight: 600;
+  margin-top: 6px;
+  margin-bottom: 28px;
+  color: #2D3779;
+  }
+
+  .addNewModalFromValue {
+    font-size: 14px;
+    font-weight: 600;
+    color: #7E839F;
+  }
+
+  .addNewModalTextField {
+    padding: 14px 20px !important;
+    font-size: 14px !important;
+    font-weight: 500 !important ;
+    color: #9F9FB0 !important;
+    background-color: #FFFFFF !important;
+  }
+
+  .addNewModalBtn {
+    width: 100%;
+    padding: 16px 0 !important;
+    font-size: 16px !important;
+    margin-bottom: 36px;
+  }
+
+  .addNewModalDiseaseWrapper .form-control{
+    padding: 14px 20px !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    color: #9F9FB0 !important;
+    background: #FFFFFF !important;
+  }
+  .addNewModalLocationContainer .form-control{
+    padding: 14px 20px !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    color: #9F9FB0 !important;
+    background: #FFFFFF !important;
+  }
+  .actdionModal{
+    padding: 0 36px !important;
+  }
+  .scheduleModal {
+    padding: 0 32px !important;
+  }
+
+  .optionsModal .modal-content {
+    width: 100%;
+  }
+.actionCloseImage {
+  width: 100%;
+    display: flex;
+    margin-top: 20px;
+    margin-left: 16px;
+    align-items: center;
+    justify-content: flex-end;
+}
+.actionCloseImage:hover{
+  cursor: pointer;
+}
   .actdionModal h2 {
     font-size: 20px;
     text-align: center;
@@ -240,20 +423,46 @@
     font-weight: 700;
     margin-bottom: 20px;
 }
-
+.emailModalSubject {
+  font-size: 14px;
+  font-weight: 600;
+  color: #7E839F;
+}
+.emailModalTextField {
+  padding: 14px 20px !important;
+}
+.emailModalTextArea{
+  padding: 12px 20px;
+}
+.actionModalHeading {
+  font-size: 22px;
+  font-weight: 600;
+  margin-top: 6px;
+  color: #2D3779;
+}
+.messageSelection {
+  margin-top: 16px;
+}
 .actionDm{
-    border: 1px solid #e9f0fc;
-    border-radius: 4px;
-    margin-top: 20px;
-    padding: 20px;
+    margin-top: 32px;
+}
+.noteModalTextField {
+  padding: 12px !important;
+  background-color: #FFFFFF !important;
 }
 
 .actionDm .btnRightCont, .actionLabel .btnRightCont, .btnRightCont{
     display: flex;
     flex-direction: row;
-    justify-content: end;
+    justify-content: flex-end;
 }
-
+.sendBtn {
+  width: 100%;
+  margin-bottom: 36px;
+  margin-right: 0 !important;
+  font-size: 16px !important;
+  padding: 16px 20px !important;
+}
 .actionLabel{
     border: 1px solid #e9f0fc;
     border-radius: 4px;
@@ -261,21 +470,166 @@
     padding: 20px;
 }
 
-.actionDm div{
-    padding: 0.375rem 0.75rem;
+.scheduleModalHeading {
+  margin-bottom: 20px;
+  font-size: 22px;
+  font-weight: 600;
+  margin-top: 2px;
+  color: #2D3779;
 }
 
-.expoModalCOnt{
-    padding: 20px 0px;
+.scheduleModalTextField{
+  padding: 12px !important;
+  color: #9F9FB0 !important;
+  background: #FFFFFF !important;
+}
+
+.schedultBtn {
+  font-size: 14px !important;
+  padding: 14px 0 !important;
+  width: 100%;
+  margin-right: 0 !important;
+  margin-bottom: 32px;
+}
+
+.messageHeading {
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  color: #7E839F !important;
+}
+
+.noteModalGroup {
+  margin-top: 12px;
+}
+.noteModalSelection {
+  font-size: 12px;
+  font-weight: 400;
+  color: #7E839F;
+  margin-right: 4px;
+}
+.labelGroup {
+  margin-bottom: 20px;
+}
+.labelGroup .form-control {
+  padding: 4px;
+}
+.labelGroup .form-control .rbt-token {
+  padding: 8px 10px;
+}
+.noteModalOptions {
+  font-size: 12px;
+  font-weight: 400;
+  color: #448DC9 !important;
+  border-bottom: 1px solid #448DC9;
+
+}
+
+.noteModalPreviousCommentWrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: #F8F9FD;
+  margin-bottom: 8px;
+  padding: 12px;
+  border-radius: 2px;
+}
+
+.noteModalPreviousWrapper {
+  height: 150px;
+  overflow-y: scroll;
+  margin-bottom: 20px;
+}
+.noteModalPreviousCommentLeftContent {
+  flex-grow: 1;
+  font-size: 11px;
+  font-weight: 400;
+  color: #363C48;
+}
+.noteModalDropdown {
+  margin-left: 16px;
+}
+.noteModalPreviousCommentWrapper .dropdown-toggle {
+  background: #FFFFFF;
+  padding: 3px 5px;
+  color: #464E5F;
+  font-size: 18px;
+  border: 0px;
+  font-weight: 600;
+}
+.noteModalBtn {
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  padding: 14px 0 !important;
+  width: 100%;
+  margin-bottom: 32px;
+}
+
+.noteModalPreviousCommentWrapper .dropdown-toggle::after{
+  content: none;
+}
+.noteModalEdit {
+  background-color: #F8F9FD !important;
+}
+.scheduleDateGroup .react-datepicker-popper {
+  z-index: 4;
+}
+
+.scheduleModalInfluenersGroup .form-control {
+  background: #FFFFFF !important;
+  padding: 12px;
+}
+.scheduleModalSubject {
+  margin-top: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #7E839F;
+}
+.modal-dialog {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    align-items: center;
+    justify-content: center;
 }
 
+.modalBody{
+  padding: 0 !important;
+
+}
+
+.expoModalCont{
+    padding: 0 36px;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    color: #7E839F !important;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.exportModalHeading{
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 22px;
+    margin-top: 6px;
+    margin-left: 36px;
+    color: #2D3779;
+}
 .expoBtn{
-    padding: 0.375rem 0.75rem;
+    padding: 16px 24px;
+    width: 100%;
+    font-size: 16px;
+    font-weight: 500;
+    margin: 16px 36px 36px 36px;
 }
-
+.closeImage{
+    width: 100%;
+    display: flex;
+    margin-top: 20px;
+    padding-right: 21px;
+    align-items: center;
+    justify-content: flex-end;
+}
+.closeImage:hover{
+  cursor: pointer;
+}
 .btnCenCont{
     display: flex;
     flex-direction: row;
