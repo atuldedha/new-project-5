@@ -1068,7 +1068,38 @@ export default function DashboardContent() {
                 <option>Reminder</option>
               </Form.Select>
             </Form.Group>
-            <Form.Group
+            <div className="dateTime">
+              <Form.Label className="emailModalSubject">Date</Form.Label>
+              <Form.Label className="emailModalSubject">Time</Form.Label>
+              <span className="emailModalSubject">{"All Day "}</span>
+            </div>
+            <div className="dateTimeValues">
+              <Form.Control
+                type="text"
+                value={`${beginDate}`}
+                style={{ backgroundColor: "#fff" }}
+                className="emailModalTextField"
+                onClick={openDateRange}
+              />
+
+              <div className="timeContainer">
+                <div style={{ marginRight: "10px" }}>
+                  <TimePicker
+                    time={startTime}
+                    onTimeChange={handleStartTimeChange}
+                  />
+                </div>
+
+                <TimePicker time={endTime} onTimeChange={handleEndTimeChange} />
+              </div>
+              <Form.Check
+                type="checkbox"
+                checked={allDay}
+                onChange={handleAllDayCheck}
+                className="checkboxContainer"
+              />
+            </div>
+            {/* <Form.Group
               className="mb-3 scheduleDateGroup"
               controlId="formGroupEmail"
             >
@@ -1101,7 +1132,7 @@ export default function DashboardContent() {
                   onChange={handleAllDayCheck}
                 />
               </div>
-            </Form.Group>
+            </Form.Group> */}
             <Form.Group
               className="mb-3 scheduleModalInfluenersGroup"
               controlId="formGroupEmail"
