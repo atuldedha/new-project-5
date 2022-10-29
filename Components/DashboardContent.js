@@ -314,7 +314,6 @@ export default function DashboardContent() {
   const addComent = () => {
     setPreviousComments([...previousComments, commentText]);
     setCommentText("");
-    handleActionClose();
   };
   const handleLabelChange = (event) => {
     console.log(event);
@@ -933,6 +932,7 @@ export default function DashboardContent() {
                   <Form.Control
                     className="emailModalTextArea"
                     as="textarea"
+                    value={commentText}
                     placeholder="Enter comment"
                     onChange={(e) => setCommentText(e.target.value)}
                     rows={3}
@@ -1069,35 +1069,41 @@ export default function DashboardContent() {
               </Form.Select>
             </Form.Group>
             <div className="dateTime">
-              <Form.Label className="emailModalSubject">Date</Form.Label>
-              <Form.Label className="emailModalSubject">Time</Form.Label>
-              <span className="emailModalSubject">{"All Day "}</span>
-            </div>
-            <div className="dateTimeValues">
-              <Form.Control
-                type="text"
-                value={`${beginDate}`}
-                style={{ backgroundColor: "#fff" }}
-                className="emailModalTextField"
-                onClick={openDateRange}
-              />
+              <div className="dateCont">
+                <Form.Label className="emailModalSubject">Date</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={`${beginDate}`}
+                  style={{ backgroundColor: "#fff" }}
+                  className="emailModalTextField"
+                  onClick={openDateRange}
+                />
+              </div>
+              <div className="timeLabel">
+                <Form.Label className="emailModalSubject">Time</Form.Label>
+                <div className="timeContainer">
+                  <div style={{ marginRight: "10px" }}>
+                    <TimePicker
+                      time={startTime}
+                      onTimeChange={handleStartTimeChange}
+                    />
+                  </div>
 
-              <div className="timeContainer">
-                <div style={{ marginRight: "10px" }}>
                   <TimePicker
-                    time={startTime}
-                    onTimeChange={handleStartTimeChange}
+                    time={endTime}
+                    onTimeChange={handleEndTimeChange}
                   />
                 </div>
-
-                <TimePicker time={endTime} onTimeChange={handleEndTimeChange} />
               </div>
-              <Form.Check
-                type="checkbox"
-                checked={allDay}
-                onChange={handleAllDayCheck}
-                className="checkboxContainer"
-              />
+              <div className="allDayCont">
+                <span className="emailModalSubject">{"All Day "}</span>
+                <Form.Check
+                  type="checkbox"
+                  checked={allDay}
+                  onChange={handleAllDayCheck}
+                  className="checkboxContainer"
+                />
+              </div>
             </div>
             {openDatePicker && (
               <div className="date" ref={calendarRef}>

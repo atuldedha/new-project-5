@@ -664,52 +664,63 @@
     align-items: center;
     justify-content: space-between;
 }
-.dateTime .emailModalSubject{
-    margin-left: 14px;
-}
+
 .checkboxContainer {
     margin-right: 14px;
 }
-.dateTimeValues {
+
+.timeLabel {
+    flex-grow: 1;
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 1em;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 45%;
+    margin-left: 10px;
 }
-
-.dateTimeValues .emailModalTextField{
+.dateCont {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    width: 25%;
+}
+.dateCont .emailModalTextField{
     padding: 8px !important;
-    width: 24%;
+    width: 100%;
 }
-
 .timeContainer {
     display: flex;
     align-items: center;
-    flex-grow: 1;
-    justify-content: center;
+    justify-content: flex-start;
 }
-.dateTimeValues .time_picker_container {
+.timeLabel .time_picker_container {
     font-size: 12px;
     font-weight: 600;
     width: 115px;
     border: 1px solid #f2f4ff;
 }
 
-.dateTimeValues .preview_container{
+.timeLabel .preview_container{
     padding-left: 25px;
     left: 40%;
 }
 
-.dateTimeValues .modal_container {
+.timeLabel .modal_container {
     width: 300px;
 }
 
-.dateTimeValues .preview_container svg {
+.timeLabel .preview_container svg {
     width: 20px !important;
 }
 
-.dateTimeValues .react_times_button {
+.timeLabel .react_times_button {
     height: 44px;
     box-shadow: none;
 } 
 
+.allDayCont {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
