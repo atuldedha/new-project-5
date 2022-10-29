@@ -1099,6 +1099,11 @@ export default function DashboardContent() {
                 className="checkboxContainer"
               />
             </div>
+            {openDatePicker && (
+              <div className="date" ref={calendarRef}>
+                <Calendar onChange={handleSelect} minDate={new Date()} />
+              </div>
+            )}
             {/* <Form.Group
               className="mb-3 scheduleDateGroup"
               controlId="formGroupEmail"
@@ -1111,11 +1116,6 @@ export default function DashboardContent() {
                 className="emailModalTextField"
                 onClick={openDateRange}
               />
-              {openDatePicker && (
-                <div className="date" ref={calendarRef}>
-                  <Calendar onChange={handleSelect} minDate={new Date()} />
-                </div>
-              )}
               <div className="timeCont">
                 <Form.Label className="emailModalSubject">Time</Form.Label>
                 <TimePicker
