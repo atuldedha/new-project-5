@@ -21,6 +21,9 @@ import USAFlag from "../public/Images/usaFlag.png";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Image from "next/image";
+import "react-date-range/dist/styles.css"; // main style file
+import "react-date-range/dist/theme/default.css";
+import { Calendar, DateRangePicker } from "react-date-range";
 import {
   FaLocationArrow,
   FaMapMarked,
@@ -274,6 +277,24 @@ export default function DashboardContent() {
   };
   console.log(formData);
   console.log(newFormData);
+  const [beginDate, setBeginDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
+  const [openDatePicker, setOpenDatePicker] = useState(false);
+  const selectionRange = {
+    startDate: beginDate,
+    endDate: endDate,
+    key: "selection",
+  };
+
+  const handleSelect = (ranges) => {
+    setBeginDate(ranges.selection.startDate);
+    setEndDate(ranges.selection.endDate);
+    setOpenDatePicker(false);
+  };
+
+  const openDateRange = () => {
+    setOpenDatePicker(true);
+  };
   return (
     <div className="mainContent">
       <div className="contentNav">
@@ -996,8 +1017,17 @@ export default function DashboardContent() {
               className="mb-3 scheduleDateGroup"
               controlId="formGroupEmail"
             >
-              <Form.Label className="emailModalSubject">Date & Time</Form.Label>
-              <DatePicker
+              <Form.Label className="emailModalSubject">
+                Start Date & End Date
+              </Form.Label>
+              <Form.Control
+                type="text"
+                value={`${beginDate.toLocaleDateString()}, ${endDate.toLocaleDateString()}`}
+                style={{ backgroundColor: "#fff" }}
+                className="emailModalTextField"
+                onClick={openDateRange}
+              />
+              {/* <DatePicker
                 className="scheduleModalTextField"
                 selected={startDate}
                 onChange={(date) => setStartDate(date)}
@@ -1006,13 +1036,23 @@ export default function DashboardContent() {
                 timeFormat="p"
                 timeIntervals={15}
                 dateFormat="Pp"
-              />
+              /> */}
+              {openDatePicker && (
+                <div className="date">
+                  <DateRangePicker
+                    ranges={[selectionRange]}
+                    onChange={handleSelect}
+                    editableDateInputs={true}
+                    minDate={new Date()}
+                  />
+                </div>
+              )}
             </Form.Group>
             <Form.Group
               className="mb-3 scheduleModalInfluenersGroup"
               controlId="formGroupEmail"
             >
-              <Form.Label className="emailModalSubject">Influencers</Form.Label>
+              <Form.Label className="emailModalSubject">Influencer</Form.Label>
               <Typeahead
                 id="basic-typeahead-multiple"
                 labelKey="name"
