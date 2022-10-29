@@ -1044,6 +1044,7 @@ export default function DashboardContent() {
                     onChange={handleSelect}
                     editableDateInputs={true}
                     minDate={new Date()}
+                    fixedHeight={true}
                   />
                 </div>
               )}

@@ -222,6 +222,10 @@
  }
 .date .rdrDefinedRangesWrapper{
     width: 0;
+    opacity: 0;
+}
+.date .rdrDateRangePickerWrapper {
+    height: 350px;
 }
  .socialCard{
     margin-top: 30px;
