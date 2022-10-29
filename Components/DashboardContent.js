@@ -286,6 +286,7 @@ export default function DashboardContent() {
   const [openDatePicker, setOpenDatePicker] = useState(false);
   const [startTime, setStartTime] = useState("12:00");
   const [endTime, setEndTime] = useState("12:00");
+  const [commentText, setCommentText] = useState("");
 
   const handleSelect = (event) => {
     setBeginDate(new Date(event).toLocaleDateString());
@@ -302,6 +303,12 @@ export default function DashboardContent() {
 
   const handleEndTimeChange = (event) => {
     setEndTime(event.hour + ":" + event.minute);
+  };
+
+  const addComent = () => {
+    setPreviousComments([...previousComments, commentText]);
+    setCommentText("");
+    handleActionClose();
   };
   return (
     <div className="mainContent">
@@ -893,7 +900,8 @@ export default function DashboardContent() {
                   <Form.Control
                     className="emailModalTextArea"
                     as="textarea"
-                    placeholder="write comment"
+                    placeholder="Enter comment"
+                    onChange={(e) => setCommentText(e.target.value)}
                     rows={3}
                     style={{ backgroundColor: "#fff" }}
                   />
@@ -940,8 +948,11 @@ export default function DashboardContent() {
                   </div>
                 ) : null}
                 <div className="btnRightCont">
-                  <Button className="primBtn cmmBtn noteModalBtn">
-                    Add Text
+                  <Button
+                    className="primBtn cmmBtn noteModalBtn"
+                    onClick={addComent}
+                  >
+                    Add Comment
                   </Button>
                 </div>
               </div>

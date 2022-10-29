@@ -545,6 +545,15 @@
   overflow-y: scroll;
   margin-bottom: 20px;
 }
+.noteModalPreviousWrapper::-webkit-scrollbar {
+    height: 3px;
+    width: 4px;
+  }
+   
+  .noteModalPreviousWrapper::-webkit-scrollbar-thumb {
+    background-color: #E5E7F2;
+  }
+
 .noteModalPreviousCommentLeftContent {
   flex-grow: 1;
   font-size: 11px;
