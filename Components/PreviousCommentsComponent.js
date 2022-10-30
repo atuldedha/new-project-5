@@ -25,7 +25,7 @@ const PreviousCommentsComponent = ({
           as="textarea"
           rows="3"
           onKeyDown={handleKeyPress}
-          value={newComment}
+          defaultValue={comment}
           onChange={(e) => setNewComment(e.target.value)}
           className="scheduleModalTextField"
           style={{ backgroundColor: "#fff" }}
