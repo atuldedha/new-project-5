@@ -8,6 +8,8 @@ import {
   Modal,
   Pagination,
   Row,
+  Tab,
+  Tabs,
 } from "react-bootstrap";
 import profilePic from "../public/Images/profile-circle-2 1.png";
 import { BsInstagram, BsThreeDotsVertical } from "react-icons/bs";
@@ -313,6 +315,44 @@ export default function DashboardContent() {
   const [commentText, setCommentText] = useState("");
   const calendarRef = useRef();
   const [allDay, setAllDay] = useState(false);
+
+  const [showConfirm, setShowConfirm] = useState(false);
+  const optionsLabel = ["Label 1", "Label 2", "Label 3", "Label 4", "Label 5"];
+  const optionsMeetings = [
+    "Meeting 1",
+    "Meeting 2",
+    "Meeting 3",
+    "Meeting 4",
+    "Meeting 5",
+  ];
+  const optionsReminders = [
+    "Reminder 1",
+    "Reminder 2",
+    "Reminder 3",
+    "Reminder 4",
+    "Reminder 5",
+  ];
+  const optionsTask = ["Task 1", "Task 2", "Task 3", "Task 4", "Task 5"];
+  const [multiSelectionsLabel, setMultiSelectionsLabel] = useState([
+    "Label 1",
+    "Label 2",
+  ]);
+  const [multiSelectionsMeetings, setMultiSelectionsMeetings] = useState([
+    "Meeting 1",
+    "Meeting 2",
+  ]);
+  const [multiSelectionsReminder, setMultiSelectionsReminder] = useState([
+    "Reminder 1",
+    "Reminder 2",
+  ]);
+  const [multiSelectionsTask, setMultiSelectionsTask] = useState([
+    "Task 1",
+    "Task 2",
+  ]);
+
+  const addMoreLabels = (e) => {
+    e.preventDefault();
+  };
 
   const handleSelect = (event) => {
     setBeginDate(new Date(event).toLocaleDateString());
@@ -625,8 +665,308 @@ export default function DashboardContent() {
       </Modal>
 
       {/* Edit Modal */}
+      <Modal show={editShow} onHide={handleEditClose} id="editClient">
+        <Modal.Body>
+          <div className="editHeader">
+            <h2>Influencer Name</h2>
+            <div className="btnActions">
+              {showConfirm && (
+                <button
+                  type="button"
+                  class="ligBtn cmmBtn btn btn-primary"
+                  onClick={() => setShowConfirm(!showConfirm)}
+                >
+                  Cancel
+                </button>
+              )}
+              {!showConfirm && (
+                <button
+                  type="button"
+                  class="primBtn cmmBtn btn btn-primary"
+                  onClick={() => setShowConfirm(!showConfirm)}
+                >
+                  Edit
+                </button>
+              )}
+              {showConfirm && (
+                <button
+                  type="button"
+                  class="primBtn cmmBtn btn btn-primary"
+                  onClick={() => setShowConfirm(!showConfirm)}
+                >
+                  Confirm
+                </button>
+              )}
+            </div>
+          </div>
+          <Form>
+            <Tabs defaultActiveKey="info" id="editClients">
+              <Tab eventKey="info" title="Info">
+                <Row>
+                  <Col xs={6}>
+                    <Form.Group className="mb-3" controlId="formGroupEmail">
+                      <Form.Label>First Name</Form.Label>
+                      <Form.Control
+                        disabled={!showConfirm ? true : false}
+                        name="firstName"
+                        value={formData.firstName}
+                        onChange={handleChange}
+                        type="text"
+                        placeholder="Enter First Name"
+                      />
+                    </Form.Group>
+                  </Col>
+                  <Col xs={6}>
+                    <Form.Group className="mb-3" controlId="formGroupEmail">
+                      <Form.Label>Last Name</Form.Label>
+                      <Form.Control
+                        disabled={!showConfirm ? true : false}
+                        name="lastName"
+                        value={formData.lastName}
+                        onChange={handleChange}
+                        type="text"
+                        placeholder="Enter Last Name"
+                      />
+                    </Form.Group>
+                  </Col>
+                </Row>
 
-      <Modal show={editShow} onHide={handleEditClose}>
+                <Row>
+                  <Col xs={6}>
+                    <Form.Group className="mb-3" controlId="formGroupEmail">
+                      <Form.Label>Email address</Form.Label>
+                      <Form.Control
+                        disabled={!showConfirm ? true : false}
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        type="email"
+                        placeholder="Enter Email address"
+                        style={{ backgroundColor: "#fff" }}
+                      />
+                    </Form.Group>
+                  </Col>
+                  <Col xs={6}>
+                    <Form.Group className="mb-3" controlId="formGroupEmail">
+                      <Form.Label>Username</Form.Label>
+                      <Form.Control
+                        disabled={!showConfirm ? true : false}
+                        name="userName"
+                        value={formData.userName}
+                        onChange={handleChange}
+                        type="text"
+                        placeholder="Enter Username"
+                      />
+                    </Form.Group>
+                  </Col>
+                </Row>
+                {/* <hr/> */}
+                <Row>
+                  <Col xs={6}>
+                    <Form.Group className="mb-3" controlId="formGridState">
+                      <Form.Label>Social Media</Form.Label>
+                      <Form.Select
+                        disabled={!showConfirm ? true : false}
+                        name="platform"
+                        value={formData.platform}
+                        onChange={handleChange}
+                        defaultValue="Choose..."
+                      >
+                        <option>Please Select</option>
+                        <option>Instagram</option>
+                        <option>Tiktok</option>
+                        <option>Youtube</option>
+                      </Form.Select>
+                    </Form.Group>
+                  </Col>
+                  <Col xs={6}>
+                    <Form.Group className="mb-3" controlId="formGroupEmail">
+                      <Form.Label>Disease area</Form.Label>
+                      <Typeahead
+                        id="basic-typeahead-single"
+                        labelKey="name"
+                        options={options}
+                        placeholder="Please Select"
+                        disabled={!showConfirm ? true : false}
+                        name="diseaseArea"
+                        value={formData.diseaseArea}
+                        onChange={handleChange}
+                      />
+                    </Form.Group>
+                  </Col>
+                </Row>
+
+                <Row>
+                  <Col xs={6}>
+                    <Form.Group className="mb-3" controlId="formGroupEmail">
+                      <Form.Label>Location</Form.Label>
+                      <Typeahead
+                        id="basic-typeahead-single"
+                        labelKey="name"
+                        options={options}
+                        placeholder="Please Select"
+                        disabled={!showConfirm ? true : false}
+                        name="location"
+                        value={formData.location}
+                        onChange={handleChange}
+                      />
+                    </Form.Group>
+                  </Col>
+                </Row>
+              </Tab>
+              <Tab eventKey="management" title="Management">
+                <Row>
+                  <Col xs={6}>
+                    <Form.Group className="mb-3" controlId="formGroupEmail">
+                      <Form.Label>Comments</Form.Label>
+                      <Form.Control
+                        as="textarea"
+                        rows={3}
+                        disabled={!showConfirm ? true : false}
+                        style={{ backgroundColor: "#fff", height: "81.5px" }}
+                      />
+                    </Form.Group>
+                  </Col>
+                  <Col xs={6}>
+                    <Form.Group
+                      className="mb-3 labelsSection"
+                      controlId="formGroupEmail"
+                    >
+                      <Form.Label>Labels</Form.Label>
+                      <Typeahead
+                        id="basic-typeahead-multiple"
+                        labelKey="name"
+                        multiple
+                        onChange={setMultiSelectionsLabel}
+                        options={optionsLabel}
+                        placeholder="--- Select Label ---"
+                        selected={multiSelectionsLabel}
+                        disabled={!showConfirm ? true : false}
+                      />
+                    </Form.Group>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col xs={6}>
+                    <Form.Group
+                      className="mb-3 labelsSection"
+                      controlId="formGroupEmail"
+                      id="meetingsSection"
+                    >
+                      <Form.Label>Meetings</Form.Label>
+                      <Typeahead
+                        disabled={!showConfirm ? true : false}
+                        id="basic-typeahead-multiple"
+                        labelKey="name"
+                        multiple
+                        onChange={setMultiSelectionsMeetings}
+                        options={optionsMeetings}
+                        placeholder="--- Select Meetings ---"
+                        selected={multiSelectionsMeetings}
+                      />
+                    </Form.Group>
+                  </Col>
+                  <Col xs={6}>
+                    <Form.Group
+                      className="mb-3 labelsSection"
+                      controlId="formGroupEmail"
+                      id="remindersSection"
+                    >
+                      <Form.Label>Reminders</Form.Label>
+                      <Typeahead
+                        disabled={!showConfirm ? true : false}
+                        id="basic-typeahead-multiple"
+                        labelKey="name"
+                        multiple
+                        onChange={setMultiSelectionsReminder}
+                        options={optionsReminders}
+                        placeholder="--- Select Reminder ---"
+                        selected={multiSelectionsReminder}
+                      />
+                    </Form.Group>
+                  </Col>
+                </Row>
+                <hr />
+                <Row>
+                  <Col xs={6}>
+                    <Form.Group
+                      className="mb-3 labelsSection"
+                      controlId="formGroupEmail"
+                      id="tasksSection"
+                    >
+                      <Form.Label>Tasks</Form.Label>
+                      <Typeahead
+                        disabled={!showConfirm ? true : false}
+                        id="basic-typeahead-multiple"
+                        labelKey="name"
+                        multiple
+                        onChange={setMultiSelectionsTask}
+                        options={optionsTask}
+                        placeholder="Select Task"
+                        selected={multiSelectionsTask}
+                      />
+                    </Form.Group>
+                  </Col>
+                  <Col xs={6}>
+                    <Form.Group className="mb-3" controlId="formGridState">
+                      <Form.Label>Status </Form.Label>
+                      <Form.Select
+                        name="status"
+                        value={formData.status}
+                        onChange={handleChange}
+                        defaultValue="Choose..."
+                        disabled={!showConfirm ? true : false}
+                      >
+                        <option>Select Status</option>
+                        <option>Ongoing</option>
+                        <option>Done</option>
+                      </Form.Select>
+                    </Form.Group>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col xs={6}>
+                    <Form.Group className="mb-3" controlId="formGridState">
+                      <Form.Label>Date Added</Form.Label>
+                      <Form.Control
+                        name="tasks"
+                        type="text"
+                        style={{ backgroundColor: "#F8FAFB" }}
+                        disabled={!showConfirm ? true : false}
+                        value={new Date().toLocaleDateString()}
+                      />
+                    </Form.Group>
+                  </Col>
+                  <Col xs={6}>
+                    <Form.Group className="mb-3" controlId="formGridState">
+                      <Form.Label>Date Status Changed </Form.Label>
+                      {showConfirm ? (
+                        <Form.Control
+                          name="tasks"
+                          type="text"
+                          style={{ backgroundColor: "#F8FAFB" }}
+                          disabled={!showConfirm ? true : false}
+                          value={new Date().toLocaleDateString()}
+                        />
+                      ) : (
+                        <Form.Control
+                          readOnly
+                          name="tasks"
+                          value=""
+                          type="text"
+                          style={{ backgroundColor: "#F8FAFB" }}
+                          disabled={!showConfirm ? true : false}
+                        />
+                      )}
+                    </Form.Group>
+                  </Col>
+                </Row>
+              </Tab>
+            </Tabs>
+          </Form>
+        </Modal.Body>
+      </Modal>
+      {/* <Modal show={editShow} onHide={handleEditClose}>
         <Modal.Body className="campModal">
           <h2>Edit Influencer</h2>
           <Form>
@@ -828,7 +1168,7 @@ export default function DashboardContent() {
             </Button>
           )}
         </Modal.Body>
-      </Modal>
+      </Modal> */}
 
       {/* actionModal */}
 

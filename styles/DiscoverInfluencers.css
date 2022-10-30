@@ -724,3 +724,169 @@
     align-items: center;
     justify-content: center;
 }
+
+
+
+#editClient .nav-tabs{
+  margin-bottom: 16px;
+  font-weight: 600;
+  font-size: 14px;
+  justify-content: unset !important;
+  border: none;
+}
+
+#editClient .nav-link {
+  color: #7E839F;
+}
+#editClient .nav-link.active{
+  border-color: #ffffff;
+  color: #448DC9;
+  border-bottom: solid 2px #448DC9;
+}
+
+#editClient{
+  max-width: 800px !important;
+}
+#editClient .modal-content{
+  width: 100%;
+  padding: 36px;
+}
+#editClient h2{
+  text-align: left;
+}
+
+#editClient hr{
+  border: 1px solid #E9F0FC;
+}
+
+
+#editClient .modal-body {
+  padding: 0px !important;
+}
+
+.editHeader{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.labelsSection{
+  position: relative;
+}
+#addMoreLabels{
+  margin-top: -65px;
+  position: sticky;
+  left: 65.7%;
+  z-index: 9999;
+  padding: 2px 8px;
+}
+
+
+#basic-typeahead-single
+{
+  background-color: #fff !important;
+}
+.rbt-input-multi {
+  background-color: #fff !important;
+}
+.rbt-input-multi.disabled {
+  background-color: #fff !important;
+}
+
+#meetingsSection .rbt-token .rbt-token-label {
+  color: #fff;
+  background-color: #000080;
+  border-radius: 0.25rem;
+}
+
+#meetingsSection .rbt-token.rbt-token-removeable {
+  color: #fff;
+  background-color: #000080;
+  border-radius: 0.25rem;
+}
+
+
+#remindersSection .rbt-token .rbt-token-label {
+  color: #fff;
+  background-color: #ffa500;
+  border-radius: 0.25rem;
+}
+
+
+#remindersSection .rbt-token.rbt-token-removeable {
+  color: #fff;
+  background-color: #ffa500;
+  border-radius: 0.25rem;
+}
+
+#tasksSection .rbt-token .rbt-token-label {
+  color: #fff;
+  background-color: #008000;
+  border-radius: 0.25rem;
+}
+
+#tasksSection .rbt-token.rbt-token-removeable {
+  color: #fff;
+  background-color: #008000;
+  border-radius: 0.25rem;
+}
+
+
+
+
+#formGroupEmail:disabled {
+  background-color: #fff !important;
+}
+
+#formGridState:disabled {
+  background-color: #fff !important;
+}
+
+
+.form-control:disabled {
+  background-color: #fff;
+}
+
+.form-control {
+  background-color: #fff;
+}
+
+
+#addMoreMeetings{
+  top: 35px;
+  position: absolute;
+  left: 85.7%;
+  z-index: 9999;
+  padding: 2px 8px;
+}
+#addMoreLabelsNote{
+  margin-top: -65px;
+  position: sticky;
+  left: 59.6%;
+  z-index: 9999;
+  padding: 5px 12px;
+  background-color: #448DC9;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.commentsAdded{
+  max-height: 200px;
+  overflow-y: scroll;
+  margin-bottom: 10px;
+
+}
+.commentsAdded .eachComment {
+  align-items: center;
+  padding: 12px;
+  margin-bottom: 16px;   
+  width: 416px;
+  background: #F8F9FD;
+  border-radius: 2px;
+  flex: none;
+  order: 1;
+  align-self: stretch;
+  display: flex;
+  justify-content: space-between;
+}
