@@ -101,7 +101,7 @@ export default function DashboardContent() {
       num: "89670",
     },
     {
-      headingInner: "Scheduled Call",
+      headingInner: "To be approved",
       num: "100",
     },
   ];
