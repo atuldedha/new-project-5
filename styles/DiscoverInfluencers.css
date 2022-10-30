@@ -220,7 +220,13 @@
     border: 1px solid #BCBCBC;
     border-radius: 4px;
  }
-
+.date .rdrDefinedRangesWrapper{
+    width: 0;
+    opacity: 0;
+}
+.date .rdrDateRangePickerWrapper {
+    height: 350px;
+}
  .socialCard{
     margin-top: 30px;
     padding: 20px;
@@ -539,6 +545,15 @@
   overflow-y: scroll;
   margin-bottom: 20px;
 }
+.noteModalPreviousWrapper::-webkit-scrollbar {
+    height: 3px;
+    width: 4px;
+  }
+   
+  .noteModalPreviousWrapper::-webkit-scrollbar-thumb {
+    background-color: #E5E7F2;
+  }
+
 .noteModalPreviousCommentLeftContent {
   flex-grow: 1;
   font-size: 11px;
@@ -643,4 +658,69 @@
     font-size: 18px;
     border: 0px;
     font-weight: 600;
+}
+.dateTime{
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.checkboxContainer {
+    margin-top: 10px;
+}
+
+.timeLabel {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 45%;
+    margin-left: 10px;
+}
+.dateCont {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    width: 25%;
+}
+.dateCont .emailModalTextField{
+    padding: 8px !important;
+    width: 100%;
+}
+.timeContainer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+.timeLabel .time_picker_container {
+    font-size: 12px;
+    font-weight: 600;
+    width: 115px;
+    border: 1px solid #f2f4ff;
+}
+
+.timeLabel .preview_container{
+    padding-left: 25px;
+    left: 40%;
+}
+
+.timeLabel .modal_container {
+    width: 300px;
+}
+
+.timeLabel .preview_container svg {
+    width: 20px !important;
+}
+
+.timeLabel .react_times_button {
+    height: 44px;
+    box-shadow: none;
+} 
+
+.allDayCont {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }

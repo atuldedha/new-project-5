@@ -21,12 +21,21 @@ import USAFlag from "../public/Images/usaFlag.png";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Image from "next/image";
+import "react-date-range/dist/styles.css"; // main style file
+import "react-date-range/dist/theme/default.css";
+import { Calendar, DateRange, DateRangePicker } from "react-date-range";
+import TimePicker from "react-times";
+
+// use material theme
+import "react-times/css/material/default.css";
+
 import {
   FaLocationArrow,
   FaMapMarked,
   FaMapMarker,
   FaMapMarkerAlt,
 } from "react-icons/fa";
+import PreviousCommentsComponent from "./PreviousCommentsComponent";
 
 export default function DashboardContent() {
   const ref = useRef();
@@ -68,7 +77,12 @@ export default function DashboardContent() {
 
   const [hover, setHover] = useState(false);
 
-  const optionLabel = ["Product Designer", "UI", "App Design", "UX"];
+  const [optionLabel, setOptionLabel] = useState([
+    "Product Designer",
+    "UI",
+    "App Design",
+    "UX",
+  ]);
   const [multiSelections, setMultiSelections] = useState([]);
 
   const data = [
@@ -271,9 +285,83 @@ export default function DashboardContent() {
     if (actionName === "edit") {
       setEditing(true);
     }
+    if (actionName === "cancel") {
+      setEditing(false);
+    }
   };
-  console.log(formData);
-  console.log(newFormData);
+
+  const saveComment = (newComment, index) => {
+    let temp = previousComments;
+    temp[index] = newComment;
+    setPreviousComments(
+      previousComments.map((comment, pos) => {
+        if (pos === index) {
+          {
+            return newComment;
+          }
+        } else {
+          return comment;
+        }
+      })
+    );
+  };
+
+  const [beginDate, setBeginDate] = useState(new Date().toLocaleDateString());
+  const [openDatePicker, setOpenDatePicker] = useState(false);
+  const [startTime, setStartTime] = useState("12:00");
+  const [endTime, setEndTime] = useState("12:00");
+  const [commentText, setCommentText] = useState("");
+  const calendarRef = useRef();
+  const [allDay, setAllDay] = useState(false);
+
+  const handleSelect = (event) => {
+    setBeginDate(new Date(event).toLocaleDateString());
+    setOpenDatePicker(false);
+  };
+
+  const openDateRange = () => {
+    setOpenDatePicker(true);
+  };
+
+  const handleStartTimeChange = (event) => {
+    setStartTime(event.hour + ":" + event.minute);
+  };
+
+  const handleEndTimeChange = (event) => {
+    setEndTime(event.hour + ":" + event.minute);
+  };
+
+  const addComent = () => {
+    setPreviousComments([...previousComments, commentText]);
+    setCommentText("");
+  };
+  const handleLabelChange = (event) => {
+    console.log(event);
+    // event?.map((item) => {
+    //   if (item.customOption) {
+    //     if (!optionLabel.find((label) => label === item.name)) {
+    //       setOptionLabel([...optionLabel, item.name]);
+    //     }
+    //   }
+    // });
+  };
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (calendarRef.current && !calendarRef.current.contains(event.target)) {
+        setOpenDatePicker(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [calendarRef]);
+
+  const handleAllDayCheck = (event) => {
+    console.log(event);
+    setAllDay(event.target.checked);
+  };
   return (
     <div className="mainContent">
       <div className="contentNav">
@@ -864,7 +952,9 @@ export default function DashboardContent() {
                   <Form.Control
                     className="emailModalTextArea"
                     as="textarea"
-                    placeholder="write comment"
+                    value={commentText}
+                    placeholder="Enter comment"
+                    onChange={(e) => setCommentText(e.target.value)}
                     rows={3}
                     style={{ backgroundColor: "#fff" }}
                   />
@@ -876,43 +966,25 @@ export default function DashboardContent() {
                       Previous Comments
                     </Form.Label>
                     {previousComments.map((comment, index) => (
-                      <div className="noteModalPreviousCommentWrapper">
-                        <div className="noteModalPreviousCommentLeftContent">
-                          {comment}
-                        </div>
-                        <div
-                          className="info noteModalDropdown"
-                          onClick={handleEditClose}
-                          style={{ flexDirection: "row", alignItems: "center" }}
-                        >
-                          <DropdownButton
-                            variant="link"
-                            id="dropdown-basic-button"
-                            title={<BsThreeDotsVertical />}
-                          >
-                            <Dropdown.Item
-                              onClick={() =>
-                                handlePreviousCommentAction("edit", index)
-                              }
-                            >
-                              Edit
-                            </Dropdown.Item>
-                            <Dropdown.Item
-                              onClick={() =>
-                                handlePreviousCommentAction("remove", index)
-                              }
-                            >
-                              Remove
-                            </Dropdown.Item>
-                          </DropdownButton>
-                        </div>
-                      </div>
+                      <PreviousCommentsComponent
+                        key={index}
+                        comment={comment}
+                        handleEditClose={handleEditClose}
+                        handlePreviousCommentAction={
+                          handlePreviousCommentAction
+                        }
+                        index={index}
+                        saveComment={saveComment}
+                      />
                     ))}
                   </div>
                 ) : null}
                 <div className="btnRightCont">
-                  <Button className="primBtn cmmBtn noteModalBtn">
-                    Add Text
+                  <Button
+                    className="primBtn cmmBtn noteModalBtn"
+                    onClick={addComent}
+                  >
+                    Add Comment
                   </Button>
                 </div>
               </div>
@@ -944,10 +1016,13 @@ export default function DashboardContent() {
                   <Typeahead
                     defaultSelected={optionLabel.slice(0, 1)}
                     id="public-methods-example"
+                    allowNew
+                    onChange={handleLabelChange}
                     labelKey="name"
                     multiple
                     options={optionLabel}
                     placeholder="Add Label"
+                    newSelectionPrefix="Add a new label: "
                     ref={ref}
                   />
                 </Form.Group>
@@ -992,27 +1067,82 @@ export default function DashboardContent() {
                 <option>Reminder</option>
               </Form.Select>
             </Form.Group>
-            <Form.Group
+            <div className="dateTime">
+              <div className="dateCont">
+                <Form.Label className="emailModalSubject">Date</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={`${beginDate}`}
+                  style={{ backgroundColor: "#fff" }}
+                  className="emailModalTextField"
+                  onClick={openDateRange}
+                />
+              </div>
+              <div className="timeLabel">
+                <Form.Label className="emailModalSubject">Time</Form.Label>
+                <div className="timeContainer">
+                  <div style={{ marginRight: "10px" }}>
+                    <TimePicker
+                      time={startTime}
+                      onTimeChange={handleStartTimeChange}
+                    />
+                  </div>
+
+                  <TimePicker
+                    time={endTime}
+                    onTimeChange={handleEndTimeChange}
+                  />
+                </div>
+              </div>
+              <div className="allDayCont">
+                <span className="emailModalSubject">{"All Day "}</span>
+                <Form.Check
+                  type="checkbox"
+                  checked={allDay}
+                  onChange={handleAllDayCheck}
+                  className="checkboxContainer"
+                />
+              </div>
+            </div>
+            {openDatePicker && (
+              <div className="date" ref={calendarRef}>
+                <Calendar onChange={handleSelect} minDate={new Date()} />
+              </div>
+            )}
+            {/* <Form.Group
               className="mb-3 scheduleDateGroup"
               controlId="formGroupEmail"
             >
-              <Form.Label className="emailModalSubject">Date & Time</Form.Label>
-              <DatePicker
-                className="scheduleModalTextField"
-                selected={startDate}
-                onChange={(date) => setStartDate(date)}
-                locale="pt-BR"
-                showTimeSelect
-                timeFormat="p"
-                timeIntervals={15}
-                dateFormat="Pp"
+              <Form.Label className="emailModalSubject">Date</Form.Label>
+              <Form.Control
+                type="text"
+                value={`${beginDate}`}
+                style={{ backgroundColor: "#fff" }}
+                className="emailModalTextField"
+                onClick={openDateRange}
               />
-            </Form.Group>
+              <div className="timeCont">
+                <Form.Label className="emailModalSubject">Time</Form.Label>
+                <TimePicker
+                  time={startTime}
+                  onTimeChange={handleStartTimeChange}
+                />
+                <TimePicker time={endTime} onTimeChange={handleEndTimeChange} />
+              </div>
+              <div className="checkboxCont">
+                <span className="emailModalSubject">{"All Day "}</span>
+                <Form.Check
+                  type="checkbox"
+                  checked={allDay}
+                  onChange={handleAllDayCheck}
+                />
+              </div>
+            </Form.Group> */}
             <Form.Group
               className="mb-3 scheduleModalInfluenersGroup"
               controlId="formGroupEmail"
             >
-              <Form.Label className="emailModalSubject">Influencers</Form.Label>
+              <Form.Label className="emailModalSubject">Influencer</Form.Label>
               <Typeahead
                 id="basic-typeahead-multiple"
                 labelKey="name"
