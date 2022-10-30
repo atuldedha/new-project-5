@@ -1427,7 +1427,7 @@ export default function DashboardContent() {
                       onTimeChange={handleStartTimeChange}
                     />
                   </div>
-
+                  <span>-</span>
                   <TimePicker
                     time={endTime}
                     onTimeChange={handleEndTimeChange}

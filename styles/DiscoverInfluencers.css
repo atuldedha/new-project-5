@@ -76,7 +76,19 @@
     background: #FFFFFF;
     border-radius: 6px;
     padding: 16px;
+    height: 400px;
+    overflow-y: auto;
 }
+
+.dataCard::-webkit-scrollbar {
+  height: 3px;
+  width: 4px;
+}
+ 
+.dataCard::-webkit-scrollbar-thumb {
+  background-color: #E5E7F2;
+}
+
 
 .spanWrapper {
   margin-bottom: 16px;
@@ -663,10 +675,11 @@
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
+    margin-bottom: 1em;
 }
 
 .checkboxContainer {
-    margin-top: 10px;
+    margin-top: 20px;
 }
 
 .timeLabel {
@@ -687,6 +700,7 @@
 .dateCont .emailModalTextField{
     padding: 8px !important;
     width: 100%;
+    height: 46px;
 }
 .timeContainer {
     display: flex;
@@ -697,7 +711,7 @@
     font-size: 12px;
     font-weight: 600;
     width: 115px;
-    border: 1px solid #f2f4ff;
+    border: 1px solid #edf1ff;
 }
 
 .timeLabel .preview_container{
@@ -721,7 +735,7 @@
 .allDayCont {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
 }
 
