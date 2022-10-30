@@ -35,6 +35,7 @@ import {
   FaMapMarker,
   FaMapMarkerAlt,
 } from "react-icons/fa";
+import PreviousCommentsComponent from "./PreviousCommentsComponent";
 
 export default function DashboardContent() {
   const ref = useRef();
@@ -284,6 +285,25 @@ export default function DashboardContent() {
     if (actionName === "edit") {
       setEditing(true);
     }
+    if (actionName === "cancel") {
+      setEditing(false);
+    }
+  };
+
+  const saveComment = (newComment, index) => {
+    let temp = previousComments;
+    temp[index] = newComment;
+    setPreviousComments(
+      previousComments.map((comment, pos) => {
+        if (pos === index) {
+          {
+            return newComment;
+          }
+        } else {
+          return comment;
+        }
+      })
+    );
   };
 
   const [beginDate, setBeginDate] = useState(new Date().toLocaleDateString());
@@ -946,37 +966,16 @@ export default function DashboardContent() {
                       Previous Comments
                     </Form.Label>
                     {previousComments.map((comment, index) => (
-                      <div className="noteModalPreviousCommentWrapper">
-                        <div className="noteModalPreviousCommentLeftContent">
-                          {comment}
-                        </div>
-                        <div
-                          className="info noteModalDropdown"
-                          onClick={handleEditClose}
-                          style={{ flexDirection: "row", alignItems: "center" }}
-                        >
-                          <DropdownButton
-                            variant="link"
-                            id="dropdown-basic-button"
-                            title={<BsThreeDotsVertical />}
-                          >
-                            <Dropdown.Item
-                              onClick={() =>
-                                handlePreviousCommentAction("edit", index)
-                              }
-                            >
-                              Edit
-                            </Dropdown.Item>
-                            <Dropdown.Item
-                              onClick={() =>
-                                handlePreviousCommentAction("remove", index)
-                              }
-                            >
-                              Remove
-                            </Dropdown.Item>
-                          </DropdownButton>
-                        </div>
-                      </div>
+                      <PreviousCommentsComponent
+                        key={index}
+                        comment={comment}
+                        handleEditClose={handleEditClose}
+                        handlePreviousCommentAction={
+                          handlePreviousCommentAction
+                        }
+                        index={index}
+                        saveComment={saveComment}
+                      />
                     ))}
                   </div>
                 ) : null}
