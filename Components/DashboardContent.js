@@ -89,15 +89,15 @@ export default function DashboardContent() {
 
   const data = [
     {
-      headingInner: "Contacted",
+      headingInner: "Identified",
       num: "79660",
     },
     {
-      headingInner: "Registered",
+      headingInner: "Contracted",
       num: "29670",
     },
     {
-      headingInner: "Identified",
+      headingInner: "Registered",
       num: "89670",
     },
     {
