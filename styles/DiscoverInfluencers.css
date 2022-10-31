@@ -417,6 +417,10 @@
     color: #9F9FB0 !important;
     background: #FFFFFF !important;
   }
+  .editModalBody .form-control{
+    padding: 14px 20px !important;
+    background-color: #FFFFFF;
+  }
   .actdionModal{
     padding: 0 36px !important;
   }
