@@ -35,10 +35,11 @@
 }
 .clrBtn {
   border-radius: 50%;
-  padding: 6px 9px !important;
+  padding: 8px 8px !important;
 }
 .filterBtn {
   font-size: 16px !important;
+  font-weight: 600 !important;
 }
 .filterContent {
     display: flex;
@@ -80,8 +81,6 @@
     background: #FFFFFF;
     border-radius: 6px;
     padding: 16px;
-    height: 400px;
-    overflow-y: auto;
 }
 
 .dataCard::-webkit-scrollbar {
@@ -357,6 +356,16 @@
 
   .addNewModal {
     padding: 0 36px !important;
+  }
+
+  .filterContainer .form-control {
+    background-color: #FFFFFF !important;
+    padding: 8px 12px !important;
+  }
+
+  .filterTextField {
+    padding: 8px 12px !important;
+    background-color: #FFFFFF !important;
   }
 
   .addNewModalFormContainer {
@@ -774,7 +783,7 @@
 }
 #editClient .modal-content{
   width: 100%;
-  padding: 36px;
+  padding: 20px 36px;
 }
 #editClient h2{
   text-align: left;

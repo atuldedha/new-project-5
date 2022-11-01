@@ -1229,6 +1229,7 @@ export default function DashboardContent() {
             <Form.Select
               onChange={(e) => setActionContChoose(e.target.value)}
               defaultValue="Choose..."
+              style={{ backgroundColor: "#ffffff" }}
             >
               <option>Email</option>
               <option>Direct Message</option>

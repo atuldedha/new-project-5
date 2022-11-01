@@ -16,6 +16,7 @@ export default function DiscoverInfluencerFilterDetail() {
     age: false,
     days: false,
     label: false,
+    task: false,
   });
   const [startDate, endDate] = dateRange;
   const [minAge, setMinAge] = useState();
@@ -33,12 +34,12 @@ export default function DiscoverInfluencerFilterDetail() {
   const ref = useRef();
   const options = ["A", "B", "C", "D", "EE", "FFF", "GGG"];
   const optionLabel = ["Product Designer", "UI", "App Design", "UX"];
-  const status = ["Contacted", "Registered", "Identified", "To be approved"];
 
   const platformRef = useRef("Please Select");
-  const statusRef = useRef("Please Select");
   const diseaseRef = useRef();
   const locationRef = useRef();
+  const taskRef = useRef("Please Select");
+
   const handleDropdownSelection = (e, target) => {
     if (e.target.value !== "Select Platform") {
       setFiltersActive({ ...filtersActive, [target]: true });
@@ -48,8 +49,8 @@ export default function DiscoverInfluencerFilterDetail() {
     if (target === "platform") {
       platformRef.current = e.target.value;
     }
-    if (target === "status") {
-      statusRef.current = e.target.value;
+    if (target === "task") {
+      taskRef.current = e.target.value;
     }
   };
 
@@ -87,11 +88,10 @@ export default function DiscoverInfluencerFilterDetail() {
   const clearFilters = () => {
     setFilterCount("00");
     ref.current.clear();
-    console.log(platformRef);
     platformRef.current = "Please Select";
-    statusRef.current = "Please Select";
     diseaseRef.current.clear();
     locationRef.current.clear();
+    taskRef.current = "Please Select";
     setMaxAge("");
     setMinAge("");
     setMinFollowers("");
@@ -111,7 +111,7 @@ export default function DiscoverInfluencerFilterDetail() {
 
   useEffect(() => {
     setFilterCount(
-      Object.values(filtersActive).reduce((a, item) => a + item, 0)
+      "0" + Object.values(filtersActive).reduce((a, item) => a + item, 0)
     );
   }, [filtersActive]);
   return (
@@ -121,8 +121,11 @@ export default function DiscoverInfluencerFilterDetail() {
           <Form>
             <Row className="mb-3">
               <Form.Group as={Col} controlId="formGridState">
-                <Form.Label>Platform</Form.Label>
+                <Form.Label className="addNewModalFromValue">
+                  Platform
+                </Form.Label>
                 <Form.Select
+                  className="filterTextField"
                   defaultValue="Choose..."
                   onChange={(e) => handleDropdownSelection(e, "platformFilter")}
                   ref={platformRef}
@@ -135,7 +138,9 @@ export default function DiscoverInfluencerFilterDetail() {
                 </Form.Select>
               </Form.Group>
               <Form.Group as={Col} controlId="formGridState">
-                <Form.Label>Disease Area</Form.Label>
+                <Form.Label className="addNewModalFromValue">
+                  Disease Area
+                </Form.Label>
                 <Typeahead
                   id="basic-typeahead-single"
                   labelKey="name"
@@ -146,7 +151,9 @@ export default function DiscoverInfluencerFilterDetail() {
                 />
               </Form.Group>
               <Form.Group as={Col} controlId="formGridState">
-                <Form.Label>Location</Form.Label>
+                <Form.Label className="addNewModalFromValue">
+                  Location
+                </Form.Label>
                 <Typeahead
                   onChange={(e) => handleTypeAheadSelection(e, "location")}
                   id="basic-typeahead-single"
@@ -157,7 +164,9 @@ export default function DiscoverInfluencerFilterDetail() {
                 />
               </Form.Group>
               <Form.Group as={Col} controlId="formGridState">
-                <Form.Label>Followers</Form.Label>
+                <Form.Label className="addNewModalFromValue">
+                  Followers
+                </Form.Label>
                 <Row className="mb-6">
                   <div className="container">
                     <Form.Group as={Col} controlId="formGridState">
@@ -195,7 +204,7 @@ export default function DiscoverInfluencerFilterDetail() {
             </Row>
             <Row className="mb-3">
               <Form.Group as={Col} controlId="formGridState">
-                <Form.Label>Age</Form.Label>
+                <Form.Label className="addNewModalFromValue">Age</Form.Label>
                 <Row className="mb-6">
                   <div className="container">
                     <Form.Group as={Col} controlId="formGridState">
@@ -231,7 +240,9 @@ export default function DiscoverInfluencerFilterDetail() {
                 </Row>
               </Form.Group>
               <Form.Group as={Col} controlId="formGridState">
-                <Form.Label>Status changed</Form.Label>
+                <Form.Label className="addNewModalFromValue">
+                  Status changed
+                </Form.Label>
                 <Row className="mb-6">
                   <div className="container">
                     <Form.Group as={Col} controlId="formGridState">
@@ -267,7 +278,7 @@ export default function DiscoverInfluencerFilterDetail() {
                 </Row>
               </Form.Group>
               <Form.Group as={Col} controlId="formGridState">
-                <Form.Label>Label</Form.Label>
+                <Form.Label className="addNewModalFromValue">Label</Form.Label>
                 <Typeahead
                   id="public-methods-example"
                   labelKey="name"
@@ -281,7 +292,19 @@ export default function DiscoverInfluencerFilterDetail() {
                 />
               </Form.Group>
               <Form.Group as={Col} controlId="formGridState">
-                <Form.Check type="checkbox" label="Only those with task" />
+                <Form.Label className="addNewModalFromValue">Task</Form.Label>
+                <Form.Select
+                  className="filterTextField"
+                  defaultValue="Choose..."
+                  onChange={(e) => handleDropdownSelection(e, "task")}
+                  ref={taskRef}
+                  value={taskRef.current}
+                >
+                  <option>Select Platform</option>
+                  <option>Show All</option>
+                  <option>With Task</option>
+                  <option>Without Task</option>
+                </Form.Select>
               </Form.Group>
             </Row>
           </Form>
