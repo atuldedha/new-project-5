@@ -666,7 +666,7 @@ export default function DashboardContent() {
 
       {/* Edit Modal */}
       <Modal show={editShow} onHide={handleEditClose} id="editClient">
-        <Modal.Body>
+        <Modal.Body className="editModalBody">
           <div className="editHeader">
             <h2>Influencer Name</h2>
             <div className="btnActions">
@@ -704,11 +704,14 @@ export default function DashboardContent() {
               <Tab eventKey="info" title="Info">
                 <Row>
                   <Col xs={6}>
-                    <Form.Group className="mb-3" controlId="formGroupEmail">
-                      <Form.Label>First Name</Form.Label>
+                    <Form.Group className="mb-3 " controlId="formGroupEmail">
+                      <Form.Label className="addNewModalFromValue">
+                        First Name
+                      </Form.Label>
                       <Form.Control
                         disabled={!showConfirm ? true : false}
                         name="firstName"
+                        className="addNewModalTextField"
                         value={formData.firstName}
                         onChange={handleChange}
                         type="text"
@@ -718,8 +721,11 @@ export default function DashboardContent() {
                   </Col>
                   <Col xs={6}>
                     <Form.Group className="mb-3" controlId="formGroupEmail">
-                      <Form.Label>Last Name</Form.Label>
+                      <Form.Label className="addNewModalFromValue">
+                        Last Name
+                      </Form.Label>
                       <Form.Control
+                        className="addNewModalTextField"
                         disabled={!showConfirm ? true : false}
                         name="lastName"
                         value={formData.lastName}
@@ -734,10 +740,13 @@ export default function DashboardContent() {
                 <Row>
                   <Col xs={6}>
                     <Form.Group className="mb-3" controlId="formGroupEmail">
-                      <Form.Label>Email address</Form.Label>
+                      <Form.Label className="addNewModalFromValue">
+                        Email address
+                      </Form.Label>
                       <Form.Control
                         disabled={!showConfirm ? true : false}
                         name="email"
+                        className="addNewModalTextField"
                         value={formData.email}
                         onChange={handleChange}
                         type="email"
@@ -748,9 +757,12 @@ export default function DashboardContent() {
                   </Col>
                   <Col xs={6}>
                     <Form.Group className="mb-3" controlId="formGroupEmail">
-                      <Form.Label>Username</Form.Label>
+                      <Form.Label className="addNewModalFromValue">
+                        Username
+                      </Form.Label>
                       <Form.Control
                         disabled={!showConfirm ? true : false}
+                        className="addNewModalTextField"
                         name="userName"
                         value={formData.userName}
                         onChange={handleChange}
@@ -764,8 +776,11 @@ export default function DashboardContent() {
                 <Row>
                   <Col xs={6}>
                     <Form.Group className="mb-3" controlId="formGridState">
-                      <Form.Label>Social Media</Form.Label>
+                      <Form.Label className="addNewModalFromValue">
+                        Social Media
+                      </Form.Label>
                       <Form.Select
+                        className="addNewModalTextField"
                         disabled={!showConfirm ? true : false}
                         name="platform"
                         value={formData.platform}
@@ -781,7 +796,9 @@ export default function DashboardContent() {
                   </Col>
                   <Col xs={6}>
                     <Form.Group className="mb-3" controlId="formGroupEmail">
-                      <Form.Label>Disease area</Form.Label>
+                      <Form.Label className="addNewModalFromValue">
+                        Disease area
+                      </Form.Label>
                       <Typeahead
                         id="basic-typeahead-single"
                         labelKey="name"
@@ -799,7 +816,9 @@ export default function DashboardContent() {
                 <Row>
                   <Col xs={6}>
                     <Form.Group className="mb-3" controlId="formGroupEmail">
-                      <Form.Label>Location</Form.Label>
+                      <Form.Label className="addNewModalFromValue">
+                        Location
+                      </Form.Label>
                       <Typeahead
                         id="basic-typeahead-single"
                         labelKey="name"
@@ -818,8 +837,11 @@ export default function DashboardContent() {
                 <Row>
                   <Col xs={6}>
                     <Form.Group className="mb-3" controlId="formGroupEmail">
-                      <Form.Label>Comments</Form.Label>
+                      <Form.Label className="addNewModalFromValue">
+                        Comments
+                      </Form.Label>
                       <Form.Control
+                        className="addNewModalTextField"
                         as="textarea"
                         rows={3}
                         disabled={!showConfirm ? true : false}
@@ -832,7 +854,9 @@ export default function DashboardContent() {
                       className="mb-3 labelsSection"
                       controlId="formGroupEmail"
                     >
-                      <Form.Label>Labels</Form.Label>
+                      <Form.Label className="addNewModalFromValue">
+                        Labels
+                      </Form.Label>
                       <Typeahead
                         id="basic-typeahead-multiple"
                         labelKey="name"
@@ -853,7 +877,9 @@ export default function DashboardContent() {
                       controlId="formGroupEmail"
                       id="meetingsSection"
                     >
-                      <Form.Label>Meetings</Form.Label>
+                      <Form.Label className="addNewModalFromValue">
+                        Meetings
+                      </Form.Label>
                       <Typeahead
                         disabled={!showConfirm ? true : false}
                         id="basic-typeahead-multiple"
@@ -872,7 +898,9 @@ export default function DashboardContent() {
                       controlId="formGroupEmail"
                       id="remindersSection"
                     >
-                      <Form.Label>Reminders</Form.Label>
+                      <Form.Label className="addNewModalFromValue">
+                        Reminders
+                      </Form.Label>
                       <Typeahead
                         disabled={!showConfirm ? true : false}
                         id="basic-typeahead-multiple"
@@ -894,7 +922,9 @@ export default function DashboardContent() {
                       controlId="formGroupEmail"
                       id="tasksSection"
                     >
-                      <Form.Label>Tasks</Form.Label>
+                      <Form.Label className="addNewModalFromValue">
+                        Tasks
+                      </Form.Label>
                       <Typeahead
                         disabled={!showConfirm ? true : false}
                         id="basic-typeahead-multiple"
@@ -909,9 +939,12 @@ export default function DashboardContent() {
                   </Col>
                   <Col xs={6}>
                     <Form.Group className="mb-3" controlId="formGridState">
-                      <Form.Label>Status </Form.Label>
+                      <Form.Label className="addNewModalFromValue">
+                        Status{" "}
+                      </Form.Label>
                       <Form.Select
                         name="status"
+                        className="addNewModalTextField"
                         value={formData.status}
                         onChange={handleChange}
                         defaultValue="Choose..."
@@ -927,11 +960,12 @@ export default function DashboardContent() {
                 <Row>
                   <Col xs={6}>
                     <Form.Group className="mb-3" controlId="formGridState">
-                      <Form.Label>Date Added</Form.Label>
+                      <Form.Label className="addNewModalFromValue">
+                        Date Added
+                      </Form.Label>
                       <Form.Control
                         name="tasks"
                         type="text"
-                        style={{ backgroundColor: "#F8FAFB" }}
                         disabled={!showConfirm ? true : false}
                         value={new Date().toLocaleDateString()}
                       />
@@ -939,12 +973,13 @@ export default function DashboardContent() {
                   </Col>
                   <Col xs={6}>
                     <Form.Group className="mb-3" controlId="formGridState">
-                      <Form.Label>Date Status Changed </Form.Label>
+                      <Form.Label className="addNewModalFromValue">
+                        Date Status Changed{" "}
+                      </Form.Label>
                       {showConfirm ? (
                         <Form.Control
                           name="tasks"
                           type="text"
-                          style={{ backgroundColor: "#F8FAFB" }}
                           disabled={!showConfirm ? true : false}
                           value={new Date().toLocaleDateString()}
                         />
@@ -954,7 +989,6 @@ export default function DashboardContent() {
                           name="tasks"
                           value=""
                           type="text"
-                          style={{ backgroundColor: "#F8FAFB" }}
                           disabled={!showConfirm ? true : false}
                         />
                       )}

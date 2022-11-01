@@ -14,7 +14,7 @@ export default function DiscoverInfluencerFilterDetail() {
     followers: false,
     location: false,
     age: false,
-    status: false,
+    days: false,
     label: false,
   });
   const [startDate, endDate] = dateRange;
@@ -22,10 +22,14 @@ export default function DiscoverInfluencerFilterDetail() {
   const [maxAge, setMaxAge] = useState();
   const [minFollowers, setMinFollowers] = useState();
   const [maxFollowers, setMaxFollowers] = useState();
+  const [minDays, setMinDays] = useState("");
+  const [maxDays, setMaxDays] = useState("");
   let minAgeApplied = false;
   let maxAgeApplied = false;
   let minFollowersApplied = false;
   let maxFollowersApplied = false;
+  let minDaysApplied = false;
+  let maxDaysApplied = false;
   const ref = useRef();
   const options = ["A", "B", "C", "D", "EE", "FFF", "GGG"];
   const optionLabel = ["Product Designer", "UI", "App Design", "UX"];
@@ -72,6 +76,14 @@ export default function DiscoverInfluencerFilterDetail() {
     }
   };
 
+  const handleDaysSelection = () => {
+    if (minDaysApplied || maxAgeApplied) {
+      setFiltersActive({ ...filtersActive, days: true });
+    } else {
+      setFiltersActive({ ...filtersActive, days: false });
+    }
+  };
+
   const clearFilters = () => {
     setFilterCount("00");
     ref.current.clear();
@@ -84,13 +96,15 @@ export default function DiscoverInfluencerFilterDetail() {
     setMinAge("");
     setMinFollowers("");
     setMaxFollowers("");
+    setMinDays("");
+    setMaxDays("");
     setFiltersActive({
       platformFilter: false,
       disease: false,
       followers: false,
       location: false,
       age: false,
-      status: false,
+      days: false,
       label: false,
     });
   };
@@ -217,21 +231,38 @@ export default function DiscoverInfluencerFilterDetail() {
                 </Row>
               </Form.Group>
               <Form.Group as={Col} controlId="formGridState">
-                <Form.Label>Status</Form.Label>
+                <Form.Label>Status changed</Form.Label>
                 <Row className="mb-6">
                   <div className="container">
-                    <Form.Select
-                      defaultValue="Choose..."
-                      onChange={(e) => handleDropdownSelection(e, "status")}
-                      ref={statusRef}
-                      value={statusRef.current}
-                    >
-                      <option>Please Select</option>
-                      <option>Contacted</option>
-                      <option>Registered</option>
-                      <option>Identified</option>
-                      <option>To be approved</option>
-                    </Form.Select>
+                    <Form.Group as={Col} controlId="formGridState">
+                      <Form.Control
+                        type="number"
+                        placeholder="Min"
+                        value={minDays}
+                        onChange={(e) => {
+                          if (e.target.value != null) {
+                            minDaysApplied = true;
+                          }
+                          setMinDays(e.target.value);
+                          handleDaysSelection();
+                        }}
+                      />
+                    </Form.Group>
+                    <span className="dash">-</span>
+                    <Form.Group as={Col} controlId="formGridState">
+                      <Form.Control
+                        type="number"
+                        placeholder="Max"
+                        value={maxDays}
+                        onChange={(e) => {
+                          if (e.target.value) {
+                            maxDaysApplied = true;
+                          }
+                          setMaxDays(e.target.value);
+                          handleDaysSelection();
+                        }}
+                      />
+                    </Form.Group>
                   </div>
                 </Row>
               </Form.Group>
@@ -255,7 +286,7 @@ export default function DiscoverInfluencerFilterDetail() {
             </Row>
           </Form>
           <div className="btnCont" style={{ justifyContent: "space-between" }}>
-            <div></div>
+            <div></div>`
             <div>
               <Button className="primBtn cmmBtn">Filter</Button>
               <Button className="ligBtn cmmBtn" onClick={clearFilters}>
